@@ -1,7 +1,7 @@
 package com.spartan.server.entities;
 
 /**
- * Representa a un usuario del sistema
+ * Representa la informacion basica de un usuario en el sistema
  * @author hellspawn
  */
 public class User 
@@ -13,7 +13,9 @@ public class User
 	//------------------------------------------------------------------
 	//Atributos
 	//------------------------------------------------------------------
-
+	
+	
+	
 	//------------------------------------------------------------------
 	//Construtores
 	//------------------------------------------------------------------

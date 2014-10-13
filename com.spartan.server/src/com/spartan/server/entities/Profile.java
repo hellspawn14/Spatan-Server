@@ -1,6 +1,10 @@
 package com.spartan.server.entities;
 
-public class Spots 
+/**
+ * Representa el perfil de un usuario 
+ * @author hellspawn
+ */
+public class Profile
 {
 	//------------------------------------------------------------------
 	//Constantes

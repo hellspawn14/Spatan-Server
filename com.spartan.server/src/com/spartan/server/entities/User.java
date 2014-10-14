@@ -1,5 +1,7 @@
 package com.spartan.server.entities;
 
+import java.util.ArrayList;
+
 /**
  * Representa la informacion basica de un usuario en el sistema
  * @author hellspawn
@@ -24,6 +26,11 @@ public class User
 	 * Perfil del usuario
 	 */
 	private UserProfile profile;
+	
+	/**
+	 * Lista de equipos a los que pertenece el usuario 
+	 */
+	private ArrayList <Team> myTeams;
 
 	//------------------------------------------------------------------
 	//Construtores
@@ -40,6 +47,7 @@ public class User
 		this.userId = userId;
 		this.userName = userName;
 		this.profile = profile;
+		myTeams = new ArrayList <Team>();
 	}
 	
 	//------------------------------------------------------------------
@@ -54,16 +62,12 @@ public class User
 		return userId;
 	}
 
-
-
 	/**
 	 * @param userId the userId to set
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-
-
 
 	/**
 	 * @return the userName
@@ -72,16 +76,12 @@ public class User
 		return userName;
 	}
 
-
-
 	/**
 	 * @param userName the userName to set
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
-
 
 	/**
 	 * @return the profile
@@ -90,8 +90,6 @@ public class User
 		return profile;
 	}
 
-
-
 	/**
 	 * @param profile the profile to set
 	 */
@@ -99,7 +97,19 @@ public class User
 		this.profile = profile;
 	}
 
+	/**
+	 * @return the myTeams
+	 */
+	public ArrayList<Team> getMyTeams() {
+		return myTeams;
+	}
+
+	/**
+	 * @param myTeams the myTeams to set
+	 */
+	public void setMyTeams(ArrayList<Team> myTeams) {
+		this.myTeams = myTeams;
+	}
 	
-
-
+	
 }

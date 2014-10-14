@@ -1,6 +1,6 @@
 package com.spartan.server.entities;
 
-public class SoloTournament 
+public class SoloTournament extends Tournament
 {
 	//------------------------------------------------------------------
 	//Constantes

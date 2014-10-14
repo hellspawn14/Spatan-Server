@@ -1,6 +1,6 @@
 package com.spartan.server.entities;
 
-public class GroupEvent 
+public class GroupEvent extends TournamentEvent
 {
 	//------------------------------------------------------------------
 	//Constantes

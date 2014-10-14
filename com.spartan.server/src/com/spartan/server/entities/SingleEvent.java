@@ -1,6 +1,6 @@
 package com.spartan.server.entities;
 
-public class SingleEvent 
+public class SingleEvent extends Event
 {
 	//------------------------------------------------------------------
 	//Constantes

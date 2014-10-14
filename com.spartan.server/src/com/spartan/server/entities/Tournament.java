@@ -1,6 +1,10 @@
 package com.spartan.server.entities;
 
-public class Tournament 
+/**
+ * Representa un torneo 
+ * @author hellspawn
+ */
+public abstract class Tournament 
 {
 	//------------------------------------------------------------------
 	//Constantes

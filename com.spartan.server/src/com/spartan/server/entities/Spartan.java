@@ -1,5 +1,7 @@
 package com.spartan.server.entities;
 
+import java.util.Hashtable;
+
 public class Spartan 
 {
 	//------------------------------------------------------------------
@@ -10,6 +12,16 @@ public class Spartan
 	//Atributos
 	//------------------------------------------------------------------
 
+	/**
+	 * Lista de usuarios activos
+	 */
+	private Hashtable <Integer, User> activeUsers;
+	
+	/**
+	 * Lista de equipos registrados
+	 */
+	private Hashtable <Integer, Team> teamList;
+	
 	//------------------------------------------------------------------
 	//Construtores
 	//------------------------------------------------------------------

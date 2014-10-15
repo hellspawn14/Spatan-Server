@@ -9,16 +9,6 @@ public class UserProfile
 	//------------------------------------------------------------------
 	//Atributos
 	//------------------------------------------------------------------
-
-	/**
-	 * Nombre real del usuario
-	 */
-	private String name;
-	
-	/**
-	 * Apellido real del usuario 
-	 */
-	private String lastName;
 	
 	/**
 	 * Numero telefonico del usuario (preferiblemente celular)
@@ -96,10 +86,8 @@ public class UserProfile
 	 * @param nVictories - Es el numero de victorias obtenidas
 	 * @param nLoses - Es el numero de derrotas
 	 */
-	public UserProfile(String name, String lastName, String phoneNumber,double score, int nSoccer, int nBasketball, int nVoleyball,int nTennis, int nPaintball, int nVideogames, int nKarts,int nVictories, int nLoses)
+	public UserProfile(String phoneNumber,double score, int nSoccer, int nBasketball, int nVoleyball,int nTennis, int nPaintball, int nVideogames, int nKarts,int nVictories, int nLoses)
 	{
-		this.name = name;
-		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		this.score = score;
 		this.nSoccer = nSoccer;
@@ -117,37 +105,6 @@ public class UserProfile
 	//Getters & Setters
 	//------------------------------------------------------------------
 	
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-	/**
-	 * @return the lastName
-	 */
-	public String getLastName() {
-		return lastName;
-	}
-
-
-	/**
-	 * @param lastName the lastName to set
-	 */
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
 
 	/**
 	 * @return the phoneNumber

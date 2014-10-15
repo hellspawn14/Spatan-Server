@@ -1,5 +1,7 @@
 package com.spartan.server.operations;
 
+import java.util.Date;
+
 import com.spartan.server.core.DateParse;
 import com.spartan.server.db.DBService;
 import com.spartan.server.db.ScriptGenerator;
@@ -31,21 +33,51 @@ public class EventOperations
 	private ScriptGenerator scriptGen;
 	
 	//------------------------------------------------------------------
+	//Constructores 
+	//------------------------------------------------------------------
+
+	/**
+	 * Crea un nuevo operador de eventos
+	 * @param dateParse - Servicio de transformacion de fechas
+	 * @param dbService - Servicio de base de datos 
+	 * @param scriptGen - Servicio de generacion de scripts SQL
+	 */
+	public EventOperations(DateParse dateParse, DBService dbService, ScriptGenerator scriptGen)
+	{
+		this.dateParse = dateParse;
+		this.dbService = dbService;
+		this.scriptGen = scriptGen;
+	}
+	
+	
+	//------------------------------------------------------------------
 	//Operaciones generales 
 	//------------------------------------------------------------------
+	
+	
 	
 	/**
 	 * Cambia la fecha de un evento 
 	 */
-	public void changeDate(Event E, String nDate)
+	public synchronized void changeDate(Event E, String nDate) throws Exception 
 	{
+		Date today = new Date();
+		Date toChange = dateParse.StringToDate(nDate);
 		
+		
+		
+		//Compara las dos fechas
+		
+	}
+	
+	public static void main (String args[])
+	{
 	}
 
 	/**
 	 * Cambia los detalles generales de un evento 
 	 */
-	public void changeDetails()
+	public void changeDetails(Event E, String details)
 	{
 		
 	}
@@ -53,7 +85,7 @@ public class EventOperations
 	/**
 	 * Cambia el estado de un evento (ver com.spartan.server.enums)
 	 */
-	public void changeState()
+	public void changeState(Event E, String state)
 	{
 		
 	}
@@ -61,7 +93,7 @@ public class EventOperations
 	/**
 	 * Cancela un evento 
 	 */
-	public void cancelEvent()
+	public void cancelEvent(Event E)
 	{
 		
 	}
@@ -69,7 +101,7 @@ public class EventOperations
 	/**
 	 * Cambia la localizacion de un evento 
 	 */
-	public void changeLocation()
+	public void changeLocation(Event E, String location)
 	{
 		
 	}
@@ -77,7 +109,7 @@ public class EventOperations
 	/**
 	 * Actualiza el numero de lugares disponibles
 	 */
-	public void upgradeSpots()
+	public void upgradeSpots(Event E, int spots)  
 	{
 		
 	}
@@ -85,7 +117,7 @@ public class EventOperations
 	/**
 	 * Reduce el numero de lugares disponibles
 	 */
-	public void downgradeSpots()
+	public void downgradeSpots(Event E)
 	{
 		
 	}

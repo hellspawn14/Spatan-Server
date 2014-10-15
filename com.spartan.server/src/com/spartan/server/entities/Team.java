@@ -17,7 +17,7 @@ public class Team
 	/**
 	 * Nombre de usuario del lider del equipo
 	 */
-	private String teamLeader;
+	private User teamLeader;
 	
 	/**
 	 * Lista de los miembros del equipo
@@ -38,7 +38,7 @@ public class Team
 	 * @param teamName - El nombre del equipo
 	 * @param teamLeader - Lider de equipo
 	 */
-	public Team(String teamName, String teamLeader) 
+	public Team(String teamName, User teamLeader) 
 	{
 		//Inicializa los datos basicos del equipo
 		this.teamName = teamName;
@@ -47,42 +47,10 @@ public class Team
 		miembros = new Hashtable <Integer, String>();
 		
 		//Agrega al lider a las dos estructuras de control
-		miembrosEquipo.add(teamLeader);
-		miembros.put(teamLeader.hashCode(), teamLeader);
+		miembrosEquipo.add(teamLeader.getUserName());
+		miembros.put((teamLeader.getUserName()).hashCode(), teamLeader.getUserName());
 	}
 
-	//------------------------------------------------------------------
-	//Metodos
-	//------------------------------------------------------------------
-	
-	/**
-	 * Agrega un nuevo usuario al equipo
-	 * @param teamMember - Es el usuario a agregar
-	 * @throws Exception - En el caso de que el usuario ya este registrado
-	 */
-	public void addNewMember(String teamMember) throws Exception 
-	{
-		String getUser = getMemberByName(teamMember);
-		if (getUser == null)
-		{
-			miembrosEquipo.add(teamMember);
-			miembros.put(teamMember.hashCode(), teamMember);
-		}
-		else
-		{
-			throw new Exception ("The user already is in team");
-		}
-	}
-	
-	/**
-	 * Retorna un usuario dado su nombre 
-	 * @param teamMember - Es el nombre de usuario  
-	 * @return null o el nombre del usuario dado 
-	 */
-	public String getMemberByName(String teamMember)
-	{
-		return miembros.get(teamMember.hashCode());
-	}
 	
 	//------------------------------------------------------------------
 	//Getters & Setters
@@ -105,14 +73,14 @@ public class Team
 	/**
 	 * @return the teamLeader
 	 */
-	public String getTeamLeader() {
+	public User getTeamLeader() {
 		return teamLeader;
 	}
 
 	/**
 	 * @param teamLeader the teamLeader to set
 	 */
-	public void setTeamLeader(String teamLeader) {
+	public void setTeamLeader(User teamLeader) {
 		this.teamLeader = teamLeader;
 	}
 
@@ -142,7 +110,5 @@ public class Team
 	 */
 	public void setMiembros(Hashtable<Integer, String> miembros) {
 		this.miembros = miembros;
-	}
-
-	
+	}	
 }

@@ -1,24 +1,57 @@
 package com.spartan.server.entities;
 
+import java.util.ArrayList;
+
+/**
+ * Representa un evento de un torneo en solo 
+ * @author hellspawn
+ */
 public class SingleEvent extends Event
 {
-	//------------------------------------------------------------------
-	//Constantes
-	//------------------------------------------------------------------
-	
 	//------------------------------------------------------------------
 	//Atributos
 	//------------------------------------------------------------------
 
+	/**
+	 * Lista de participantes del torneo
+	 */
+	private ArrayList <User> participants;
+	
 	//------------------------------------------------------------------
-	//Construtores
+	//Constructores
 	//------------------------------------------------------------------
 
-	//------------------------------------------------------------------
-	//Metodos
-	//------------------------------------------------------------------
+	/**
+	 * Constructor generado
+	 * @param idEvent
+	 * @param date
+	 * @param state
+	 * @param place
+	 * @param details
+	 * @param spots
+	 * @param eventKey
+	 */
+	public SingleEvent(int idEvent, String date, String state, String place, String details, int spots, String eventKey)
+	{
+		super(idEvent, date, state, place, details, spots, eventKey);
+		setParticipants(new ArrayList <User>());
+	}
 
 	//------------------------------------------------------------------
 	//Getters & Setters
 	//------------------------------------------------------------------
+	
+	/**
+	 * @return the participants
+	 */
+	public ArrayList <User> getParticipants() {
+		return participants;
+	}
+
+	/**
+	 * @param participants the participants to set
+	 */
+	public void setParticipants(ArrayList <User> participants) {
+		this.participants = participants;
+	}
 }

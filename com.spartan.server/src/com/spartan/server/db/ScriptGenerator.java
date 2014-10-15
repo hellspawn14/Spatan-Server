@@ -72,6 +72,21 @@ public class ScriptGenerator
 		return query;
 	}
 	
+	/**
+	 * Retorna la Query para registrar la informacion de un usuario en la tabla History
+	 * @param userId - Es el identificador del usuario 
+	 * @return Query ->
+	 * START TRANSACTION;
+	 * USE `Spartan`;
+	 * INSERT INTO `Spartan`.`History` (`idUserHistory`, `nSoccer`, `nBasketball`, `nVoleyball`, `nTennis`, `nPaintball`, `nVideogames`, `nKarts`, `nVictories`, `nLoses`) VALUES (Xx, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+	 * COMMIT;
+	 */
+	public String registerUserHistory(int userId)
+	{
+		String query = "START TRANSACTION;" + "\n" +  "USE `Spartan`;" + "\n" + "INSERT INTO `Spartan`.`History` (`idUserHistory`, `nSoccer`, `nBasketball`, `nVoleyball`, `nTennis`, `nPaintball`, `nVideogames`, `nKarts`, `nVictories`, `nLoses`) " + "VALUES (" + userId + ", 0, 0, 0, 0, 0, 0, 0, 0, 0);" + "\n" + "COMMIT;";
+		return query;
+	}
+	
 	//------------------------------------------------------------------
 	//Getters & Setters
 	//------------------------------------------------------------------
@@ -79,6 +94,6 @@ public class ScriptGenerator
 	public static void main(String args[])
 	{
 		ScriptGenerator gen = new ScriptGenerator();
-		System.out.println(gen.registerUserBoard(7));
+		System.out.println(gen.registerUserHistory(7));
 	}
 }

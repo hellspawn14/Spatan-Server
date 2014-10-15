@@ -7,7 +7,7 @@ package com.spartan.server.entities;
 public abstract class TournamentEvent extends Event
 {
 	//------------------------------------------------------------------
-	//Construtores
+	//Constructores
 	//------------------------------------------------------------------
 
 	/**

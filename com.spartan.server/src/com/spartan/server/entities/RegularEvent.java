@@ -1,5 +1,7 @@
 package com.spartan.server.entities;
 
+import java.util.ArrayList;
+
 /**
  * Representa un evento regular (No torneo)
  * @author hellspawn
@@ -23,7 +25,7 @@ public class RegularEvent extends Event
 	/**
 	 * Lugares disponibles
 	 */
-	private Spot [] availableSpots;
+	private ArrayList <Spot> availableSpots;
 
 	//------------------------------------------------------------------
 	//Constructores
@@ -39,7 +41,7 @@ public class RegularEvent extends Event
 		super(idEvent, date, state, place, details, spots, eventKey);
 		this.sport = sport;
 		this.description = description;
-		this.availableSpots = new Spot[super.getSpots()];
+		this.availableSpots = new ArrayList <Spot>();
 	}
 
 	
@@ -75,17 +77,21 @@ public class RegularEvent extends Event
 		this.description = description;
 	}
 
+
 	/**
 	 * @return the availableSpots
 	 */
-	public Spot[] getAvailableSpots() {
+	public ArrayList<Spot> getAvailableSpots() {
 		return availableSpots;
 	}
+
 
 	/**
 	 * @param availableSpots the availableSpots to set
 	 */
-	public void setAvailableSpots(Spot[] availableSpots) {
+	public void setAvailableSpots(ArrayList<Spot> availableSpots) {
 		this.availableSpots = availableSpots;
 	}
+
+	
 }

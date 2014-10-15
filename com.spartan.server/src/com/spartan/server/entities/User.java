@@ -48,7 +48,7 @@ public class User
 	private ArrayList <Tournament> myTournaments;
 
 	//------------------------------------------------------------------
-	//Construtores
+	//Constructores
 	//------------------------------------------------------------------
 
 	/**

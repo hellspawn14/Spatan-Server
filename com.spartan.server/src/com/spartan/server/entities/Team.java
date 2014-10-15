@@ -1,6 +1,5 @@
 package com.spartan.server.entities;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class Team 
@@ -10,6 +9,11 @@ public class Team
 	//------------------------------------------------------------------
 
 	/**
+	 * Identificador del equipo
+	 */
+	private int idTeam;
+	
+	/**
 	 * Nombre del equipo
 	 */
 	private String teamName;
@@ -18,11 +22,6 @@ public class Team
 	 * Nombre de usuario del lider del equipo
 	 */
 	private User teamLeader;
-	
-	/**
-	 * Lista de los miembros del equipo
-	 */
-	private ArrayList <String> miembrosEquipo;
 	
 	/**
 	 * Tabla de hash con los miembros del equipo
@@ -38,16 +37,15 @@ public class Team
 	 * @param teamName - El nombre del equipo
 	 * @param teamLeader - Lider de equipo
 	 */
-	public Team(String teamName, User teamLeader) 
+	public Team(int idTeam, String teamName, User teamLeader) 
 	{
 		//Inicializa los datos basicos del equipo
+		this.setIdTeam(idTeam);
 		this.teamName = teamName;
 		this.teamLeader = teamLeader;
-		miembrosEquipo = new ArrayList<String>();
 		miembros = new Hashtable <Integer, String>();
 		
-		//Agrega al lider a las dos estructuras de control
-		miembrosEquipo.add(teamLeader.getUserName());
+		//Agrega al lider 
 		miembros.put((teamLeader.getUserName()).hashCode(), teamLeader.getUserName());
 	}
 
@@ -85,20 +83,6 @@ public class Team
 	}
 
 	/**
-	 * @return the miembrosEquipo
-	 */
-	public ArrayList<String> getMiembrosEquipo() {
-		return miembrosEquipo;
-	}
-
-	/**
-	 * @param miembrosEquipo the miembrosEquipo to set
-	 */
-	public void setMiembrosEquipo(ArrayList<String> miembrosEquipo) {
-		this.miembrosEquipo = miembrosEquipo;
-	}
-
-	/**
 	 * @return the miembros
 	 */
 	public Hashtable<Integer, String> getMiembros() {
@@ -110,5 +94,21 @@ public class Team
 	 */
 	public void setMiembros(Hashtable<Integer, String> miembros) {
 		this.miembros = miembros;
+	}
+
+
+	/**
+	 * @return the idTeam
+	 */
+	public int getIdTeam() {
+		return idTeam;
+	}
+
+
+	/**
+	 * @param idTeam the idTeam to set
+	 */
+	public void setIdTeam(int idTeam) {
+		this.idTeam = idTeam;
 	}	
 }

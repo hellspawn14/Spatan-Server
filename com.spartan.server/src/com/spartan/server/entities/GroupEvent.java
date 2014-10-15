@@ -13,6 +13,9 @@ public class GroupEvent extends TournamentEvent
 	//Atributos
 	//------------------------------------------------------------------
 
+	/**
+	 * Lista de los equipos participantes
+	 */
 	private ArrayList <Team> participantTeams;
 	
 	//------------------------------------------------------------------

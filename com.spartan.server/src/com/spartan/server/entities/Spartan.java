@@ -11,11 +11,13 @@ public class Spartan
 
 	/**
 	 * Lista de usuarios activos
+	 * Key -> Id
 	 */
 	private Hashtable <Integer, User> activeUsers;
 	
 	/**
 	 * Lista de equipos registrados
+	 * Key  -> Team name
 	 */
 	private Hashtable <Integer, Team> registeredTeams;
 	
@@ -33,7 +35,8 @@ public class Spartan
 	//------------------------------------------------------------------
 	//Construtores
 	//------------------------------------------------------------------
-
+	
+	
 	
 	
 	//------------------------------------------------------------------

@@ -1,106 +1,102 @@
 package com.spartan.server.operations;
 
-import com.spartan.server.entities.Spot;
+import com.spartan.server.core.DateParse;
+import com.spartan.server.db.DBService;
+import com.spartan.server.db.ScriptGenerator;
+import com.spartan.server.entities.Event;
 
+/**
+ * Conjunto de operaciones soportadas por un evento 
+ * @author hellspawn
+ */
 public class EventOperations 
 {
 	//------------------------------------------------------------------
-	//Regular event
+	//Atributos 
 	//------------------------------------------------------------------
 
 	/**
-	 * Aumenta el numero de spots disponibles para un evento 
-	 * @param nSpots - Es el nuevo numero de cupos 
-	 * Siempre es mayor que la longitud actual 
+	 * Relacion con el parser de fecha
 	 */
-	public void upgradeSpots(int nSpots)
-	{
-		Spot [] uSpots = new Spot[nSpots];
-		for (int i = 0; i < this.availableSpots.length; i++)
-		{
-			uSpots[i] = this.availableSpots[i];
-		}
-		this.setAvailableSpots(uSpots);	
-	}
+	private DateParse dateParse;
 	
 	/**
-	 * Retorna el numero de spots libres del evento 
-	 * @return numero de spots libres del evento
+	 * Relacon con la conexion con la db
 	 */
-	public int getFreeSpots()
-	{
-		Spot S = null;
-		boolean stopMe = false;
-		int free = 0;
-		for (int k = availableSpots.length - 1; k > 0 && stopMe == false; k--)
-		{
-			S = availableSpots[k];
-			if (S == null)
-			{
-				free ++;
-			}
-			else
-			{
-				stopMe = true;
-			}
-		}
-		return free;
-	}
+	private DBService dbService;
 	
 	/**
-	 * Reduce el numero de spots disponibles al numero indicado 
-	 * @param nSpots - Es el numero de spots al que se quieren reducir el cupo
-	 * @throws Exception - En el caso de que alguno de los spots que siguen al numero indicado esten ocupados
+	 * Relacion con el generador de scripts
 	 */
-	public void downgradeSpots(int nSpots) throws Exception 
-	{
-		Spot S = null;
-		boolean stop = false;
-		for (int i = nSpots; i < availableSpots.length && stop == false; i++)
-		{
-			S = availableSpots[i];
-			//Caso I: Los lugares a eliminar estan libres
-			if (S == null)
-			{
-				stop = true;
-			}
-			
-			//Caso II: El spot siguente al indicador del cupo esta ocupado
-			else
-			{
-				int eraseable = this.getFreeSpots();
-				throw new Exception ("One of the spots to erase is reserved, you can only downgrade " + eraseable + " spots");
-			}
-		}
-		Spot [] uSpots = new Spot[nSpots];
-		for (int i = 0; i < uSpots.length; i++)
-		{
-			uSpots[i] = availableSpots[i];
-		}
-		this.setAvailableSpots(uSpots);
-	}
+	private ScriptGenerator scriptGen;
+	
+	//------------------------------------------------------------------
+	//Operaciones generales 
+	//------------------------------------------------------------------
 	
 	/**
-	 * 
-	 * @param idSpot
+	 * Cambia la fecha de un evento 
 	 */
-	public void cancelSpot(int idSpot)
+	public void changeDate(Event E, String nDate)
+	{
+		
+	}
+
+	/**
+	 * Cambia los detalles generales de un evento 
+	 */
+	public void changeDetails()
 	{
 		
 	}
 	
-	public void addSpot(Spot S) throws Exception 
+	/**
+	 * Cambia el estado de un evento (ver com.spartan.server.enums)
+	 */
+	public void changeState()
 	{
-		int freeSpots = this.getFreeSpots();
-		if (freeSpots > 0)
-		{
-			int insertPoint = availableSpots.length - freeSpots;
-			availableSpots[insertPoint] = S;
-		}
-		else
-		{
-			throw new Exception ("All spots taken, sorry");
-		}
+		
 	}
+	
+	/**
+	 * Cancela un evento 
+	 */
+	public void cancelEvent()
+	{
+		
+	}
+	
+	/**
+	 * Cambia la localizacion de un evento 
+	 */
+	public void changeLocation()
+	{
+		
+	}
+	
+	/**
+	 * Actualiza el numero de lugares disponibles
+	 */
+	public void upgradeSpots()
+	{
+		
+	}
+	
+	/**
+	 * Reduce el numero de lugares disponibles
+	 */
+	public void downgradeSpots()
+	{
+		
+	}
+		
+	//------------------------------------------------------------------
+	//Regular event
+	//------------------------------------------------------------------
+	
 
+	
+	
+	
+	
 }

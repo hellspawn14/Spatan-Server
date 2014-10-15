@@ -16,16 +16,7 @@ public class UserOperations
 	 */
 	public void registerSpot(RegularEvent Re)
 	{
-		Spot S = new Spot(this.userId,com.spartan.server.enums.State.TO_ASSIST);
-		currentSpots.add(S);
-		try 
-		{
-			Re.addSpot(S);
-		}
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-		}
+
 	}
 	
 	/**

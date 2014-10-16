@@ -7,17 +7,6 @@ package com.spartan.server.db;
  */
 public class ScriptGenerator 
 {
-	//------------------------------------------------------------------
-	//Constantes
-	//------------------------------------------------------------------
-	
-	//------------------------------------------------------------------
-	//Atributos
-	//------------------------------------------------------------------
-
-	//------------------------------------------------------------------
-	//Construtores
-	//------------------------------------------------------------------
 
 	//------------------------------------------------------------------
 	//Metodos
@@ -27,8 +16,6 @@ public class ScriptGenerator
 	//------------------------------------------------------------------
 	//Servicios de usuario 
 	//------------------------------------------------------------------
-
-	
 	/**
 	 * Retorna la Query para insertar a un nuevo usuario en la tabla Users
 	 * @param userName - Es el nombre del usuario 
@@ -174,8 +161,31 @@ public class ScriptGenerator
 	}
 	
 	//------------------------------------------------------------------
-	//Getters & Setters
+	//Servicios equipo
 	//------------------------------------------------------------------
+
+	public String registerTeam(String teamName, int idCaptain)
+	{
+		String query = "";
+		return query;
+	}
+	
+	public String registerUserInTeam(int teamId, int idUser)
+	{
+		String query = "";
+		return query;
+	}
+	
+	public String changeTeamLeader()
+	{
+		
+	}
+	
+	public String removeUserFromTeam()
+	{
+		
+	}
+	
 	
 	public static void main(String args[])
 	{

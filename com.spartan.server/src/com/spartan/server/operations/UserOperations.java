@@ -6,6 +6,14 @@ import com.spartan.server.entities.Spot;
 public class UserOperations 
 {
 
+	
+	/**
+	 * Operaciones del usuario 
+	 * 1. Crear nuevo usuario 
+	 * 2. Cambiar contraseña
+	 * 3. 
+	 */
+	
 	/**
 	 * Registra un nuevo usuario en el sistema 
 	 * Proceso de registro de un usuario 

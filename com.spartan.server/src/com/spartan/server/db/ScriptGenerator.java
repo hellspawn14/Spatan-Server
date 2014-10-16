@@ -87,6 +87,36 @@ public class ScriptGenerator
 		return query;
 	}
 	
+	/**
+	 * Retorna la Query para obtener la contraseña de un usuario dado su identificador
+	 * @param userId - Es el identificador del usuario
+	 * @return Query ->
+	 * SELECT Password FROM `Spartan`.`Auth` WHERE idUserAuth = Xx;
+	 */
+	public String getUserPassword(int userId)
+	{
+		String query = "SELECT Password FROM `Spartan`.`Auth` WHERE idUserAuth = " + userId + ";";
+		return query;
+	}
+	
+	/**
+	 * Retorna la Query para actualizar la contraseña de un usuario 
+	 * @param userId - Es el id del usuario 
+	 * @param nPassword - Es la nueva contraseña
+	 * @return Query ->
+	 * START TRANSACTION;
+	 * USE `Spartan`; 
+	 * UPDATE `Spartan`.`Auth`
+	 * SET Password = 'Wola'
+	 * WHERE idUserAuth = 7; 
+	 * COMMIT;
+	 */
+	public String updateUserPassword(int userId, String nPassword)
+	{
+		String query = "START TRANSACTION;" + "\n" + "USE `Spartan`;" + "\n" + "UPDATE `Spartan`.`Auth`" +  "\n" + "SET Password = " + "'" + nPassword + "'" + "\n" +  "WHERE idUserAuth = " + userId + ";" + "\n" + "COMMIT;"; 
+		return query;
+	}
+	
 	//------------------------------------------------------------------
 	//Getters & Setters
 	//------------------------------------------------------------------
@@ -94,6 +124,6 @@ public class ScriptGenerator
 	public static void main(String args[])
 	{
 		ScriptGenerator gen = new ScriptGenerator();
-		System.out.println(gen.registerUserHistory(7));
+		System.out.println(gen.updateUserPassword(7, "Wola"));
 	}
 }

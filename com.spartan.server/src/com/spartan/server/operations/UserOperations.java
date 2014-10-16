@@ -5,14 +5,24 @@ import com.spartan.server.entities.Spot;
 
 public class UserOperations 
 {
-	public void registrarUsuario()
+
+	/**
+	 * Registra un nuevo usuario en el sistema 
+	 * Proceso de registro de un usuario 
+	 * 1. Registrar el usuario en la tabla Users 
+	 * 2. Registrar el usuario en la tabla Auth
+	 * 3. Registrar el usuario en el Score
+	 * 4. Registrar la historia del usuario
+	 */
+	public void registerNewUser()
+	{
+		
+	}
+	
+	public void updateUserPassword()
 	{
 		/**
-		 * Proceso de registro de un usuario 
-		 * 1. Registrar el usuario en la tabla Users 
-		 * 2. Registrar el usuario en la tabla Auth
-		 * 3. Registrar el usuario en el Score
-		 * 4. Registrar la historia del usuario
+		 * Proceso de actulizacion de contraseña
 		 */
 	}
 	

@@ -23,6 +23,12 @@ public class ScriptGenerator
 	//Metodos
 	//------------------------------------------------------------------
 	
+	
+	//------------------------------------------------------------------
+	//Servicios de usuario 
+	//------------------------------------------------------------------
+
+	
 	/**
 	 * Retorna la Query para insertar a un nuevo usuario en la tabla Users
 	 * @param userName - Es el nombre del usuario 
@@ -54,6 +60,12 @@ public class ScriptGenerator
 	public String registerUserAuth(int userId, String userPassword)
 	{
 		String query = "START TRANSACTION;" + "\n" + "USE `Spartan`;" + "\n" + "INSERT INTO `Spartan`.`Auth` (`idUserAuth`, `Password`) " +  "VALUES(" + userId + ", '" + userPassword + "');" + "\n" +  "COMMIT;";
+		return query;
+	}
+	
+	public String getUserId(String userName)
+	{
+		String query = "SELECT idUser FROM `Spartan`.`Users` WHERE UserName = '" + userName + "';";
 		return query;
 	}
 	
@@ -168,6 +180,6 @@ public class ScriptGenerator
 	public static void main(String args[])
 	{
 		ScriptGenerator gen = new ScriptGenerator();
-		System.out.println(gen.updateHistory(7, 1, 0, 0, 0, 0, 0, 0, 1, 0));
+		System.out.println(gen.getUserId("hellspawn"));
 	}
 }

@@ -11,7 +11,13 @@ public class UserOperations
 	 * Operaciones del usuario 
 	 * 1. Crear nuevo usuario 
 	 * 2. Cambiar contraseña
-	 * 3. 
+	 * 3. Ingresar a equipo
+	 * 4. Modificar perfil
+	 * 5. Crear torneo
+	 * 6. Crear evento
+	 * 7. Crear asistencia 
+	 * 8. Modificar asistencia
+	 * 9. Crear equipo
 	 */
 	
 	/**

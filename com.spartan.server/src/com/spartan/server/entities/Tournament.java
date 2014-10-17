@@ -35,10 +35,6 @@ public abstract class Tournament
 	 */
 	private String state;
 	
-	/**
-	 * Es el tipo de torneo 
-	 */
-	private String type;
 	
 	/**
 	 * Numero max de participantes 
@@ -61,14 +57,13 @@ public abstract class Tournament
 	 * @param type - Es el tipo de torneo 
 	 * @param nParticipants - Indica el numero de participantes permitido 
 	 */
-	public Tournament(int idTournament, String tournamentName,String tournamentDescription, String sport, String state,User organizer, String type, int nParticipants)
+	public Tournament(int idTournament, String tournamentName,String tournamentDescription, String sport, String state,User organizer, int nParticipants)
 	{
 		this.idTournament = idTournament;
 		this.tournamentName = tournamentName;
 		this.tournamentDescription = tournamentDescription;
 		this.sport = sport;
 		this.state = state;
-		this.type = type;
 		this.nParticipants = nParticipants;
 	}
 
@@ -153,23 +148,6 @@ public abstract class Tournament
 	public void setState(String state) {
 		this.state = state;
 	}
-
-
-	/**
-	 * @return the type
-	 */
-	public String getType() {
-		return type;
-	}
-
-
-	/**
-	 * @param type the type to set
-	 */
-	public void setType(String type) {
-		this.type = type;
-	}
-
 
 	/**
 	 * @return the nParticipants

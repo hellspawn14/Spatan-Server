@@ -29,9 +29,9 @@ public class GroupTournament extends Tournament
 	/**
 	 * Crea un nuevo torneo grupal sin participantes ni eventos 
 	 */
-	public GroupTournament(int idTournament, String tournamentName, String tournamentDescription, String sport, String state, User organizer, String type, int nParticipants)
+	public GroupTournament(int idTournament, String tournamentName, String tournamentDescription, String sport, String state, User organizer,  int nParticipants)
 	{
-		super(idTournament, tournamentName, tournamentDescription, sport, state,organizer, type, nParticipants);
+		super(idTournament, tournamentName, tournamentDescription, sport, state,organizer, nParticipants);
 		participants = new ArrayList <Team>();
 		tournamentEvents = new ArrayList<GroupEvent>();
 	}

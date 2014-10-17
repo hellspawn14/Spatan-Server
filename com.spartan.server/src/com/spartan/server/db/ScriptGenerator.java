@@ -434,6 +434,49 @@ public class ScriptGenerator
 		return query;
 	}
 	
+	public String updateEventState()
+	{
+		
+	}
+	
+	//------------------------------------------------------------------
+	//Servicios torneo grupal
+	//------------------------------------------------------------------
+
+	public String createGroupTournament()
+	{
+		
+	}
+	
+	public String cancelGroupTournament()
+	{
+		
+	}
+	
+	public String registerTeamInTournament()
+	{
+		
+	}
+	
+	public String removeTeamFromTournament()
+	{
+		
+	}
+	
+	public String registerGroupTournamentEvent()
+	{
+		
+	}
+	
+	public String updateGroupTournamentEventSpots()
+	{
+		
+	}
+
+	public String registerTeamGroupTournamentEvent()
+	{
+		
+	}
 	
 	public static void main(String args[])
 	{

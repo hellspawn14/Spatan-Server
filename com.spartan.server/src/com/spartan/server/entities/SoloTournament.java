@@ -25,9 +25,9 @@ public class SoloTournament extends Tournament
 	/**
 	 * Crea un nuevo torneo de singles sin eventos ni participantes
 	 */
-	public SoloTournament(int idTournament, String tournamentName, String tournamentDescription, String sport, String state, User organizer, String type, int nParticipants) 
+	public SoloTournament(int idTournament, String tournamentName, String tournamentDescription, String sport, String state, User organizer, int nParticipants) 
 	{
-		super(idTournament, tournamentName, tournamentDescription, sport, state, organizer, type, nParticipants);
+		super(idTournament, tournamentName, tournamentDescription, sport, state, organizer, nParticipants);
 		tournamentEvents = new ArrayList <SingleEvent>();
 		participants = new ArrayList <User>();
 	}

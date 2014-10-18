@@ -13,11 +13,6 @@ public class Spot
 	//------------------------------------------------------------------
 	//Atributos
 	//------------------------------------------------------------------
-
-	/**
-	 * Es el identificador del usuario que lo ocupa
-	 */
-	private int idUser;
 	
 	/**
 	 * Es el estado de la confirmacion
@@ -34,29 +29,14 @@ public class Spot
 	 * @param idEvent - Es el identificador del evento 
 	 * @param confirmation - Es la confirmacion 
 	 */
-	public Spot(int idUser, String confirmation) 
+	public Spot(String confirmation) 
 	{
-		this.idUser = idUser;
 		this.confirmation = confirmation;
 	}
 	
 	//------------------------------------------------------------------
 	//Getters & Setters
 	//------------------------------------------------------------------
-	
-	/**
-	 * @return the idUser
-	 */
-	public int getIdUser() {
-		return idUser;
-	}
-
-	/**
-	 * @param idUser the idUser to set
-	 */
-	public void setIdUser(int idUser) {
-		this.idUser = idUser;
-	}
 
 	/**
 	 * @return the confirmation

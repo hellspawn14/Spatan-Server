@@ -347,6 +347,18 @@ public class ScriptGenerator
 		return query;
 	}
 	
+	/**
+	 * Retorna la Query para actualizar el numero de spots en un evento 
+	 * @param eventId - Id del evento 
+	 * @param nSpots - Lugares 
+	 * @return Query ->
+	 * START TRANSACTION;
+	 * USE `Spartan`;
+	 * UPDATE `Spartan`.`Events`
+	 * SET Spots = Spots + nSpots
+	 * WHERE idEvent = eventId;
+	 * "COMMIT;"
+	 */
 	public String upgradeAvailableSpots(int eventId, int nSpots)
 	{
 		String query = 
@@ -354,6 +366,18 @@ public class ScriptGenerator
 				"USE `Spartan`;" + "\n" + 
 				"UPDATE `Spartan`.`Events`" + "\n" +
 				"SET Spots = Spots + " + nSpots + "\n" + 
+				"WHERE idEvent = " + eventId + ";" + "\n" +
+				"COMMIT;";
+		return query;
+	}
+	
+	public String updateEventDate(int eventId, String nDate)
+	{
+		String query = 
+				"START TRANSACTION;" + "\n" + 
+				"USE `Spartan`;" + "\n" + 
+				"UPDATE `Spartan`.`Events`" + "\n" +
+				"SET Date = " + nDate +  "\n" + 
 				"WHERE idEvent = " + eventId + ";" + "\n" +
 				"COMMIT;";
 		return query;
@@ -638,16 +662,20 @@ public class ScriptGenerator
 		return query;
 	}
 	
-	/**
-	 * Retorna la Query para registrar 
-	 * @param idTorneo
-	 * @param date
-	 * @param state
-	 * @param place
-	 * @param details
-	 * @param nSpots
-	 * @param key
-	 * @return
+	/** 
+	 * Retorna la Query para registrar un evento en un torneo 
+	 * @param idTorneo - Id del torneo 
+	 * @param date - Fecha del evento 
+	 * @param state - Estado 
+	 * @param place - Lugar 
+	 * @param details - Detalles adicionales
+	 * @param nSpots - Lugares dispo
+	 * @param key - Llave del evento 
+	 * @return Query ->
+	 * START TRANSACTION;
+	 * USE `Spartan`;
+	 * INSERT INTO `Spartan`.`SoloTournamentEvents` (`idSoloTournament`, `Date`, `State`, `Place`, `Details`, `nSpots`, `Key`) VALUES (1, 'xx', 'yy', 'xy', 'Ola ke ase', 10, '2312');
+	 * COMMIT;
 	 */
 	public String registerGroupTournamentEvent(int idTorneo, String date, String state, String place, String details, int nSpots, String key)
 	{
@@ -659,24 +687,74 @@ public class ScriptGenerator
 		return query;
 	}
 	
-	public String registerTeamInGroupTournamentEvent()
+	/**
+	 * Retorna la Query para registrar un equipo en un evento de torneo
+	 * @param idEquipo - Id del equipo
+	 * @param idEvento - Id del torneo 
+	 * @return Query ->
+	 * START TRANSACTION;
+	 * USE `Spartan`;
+	 * INSERT INTO `Spartan`.`GroupTournamentParticipants` (`idGroupEvent`, `idParticipantTeam`) VALUES (1 , 3);
+	 * COMMIT;
+	 */
+	public String registerTeamInGroupTournamentEvent(int idEquipo, int idEvento)
 	{
-		return null;
+		String query = 
+				"START TRANSACTION;" + "\n" + 
+				"USE `Spartan`;" + "\n" + 
+				"INSERT INTO `Spartan`.`GroupTournamentParticipants` (`idGroupEvent`, `idParticipantTeam`) VALUES (" + idEvento + " , " + idEquipo + ");" + "\n" +
+				"COMMIT;";
+		return query;
 	}
 	
-	public String updateGroupTournamentEventSpots()
+	/**
+	 * Retorna la Query para actualizar el numero de lugares disponibles en un evento de torneo 
+	 * @param idEvent - Id del evento 
+	 * @param idTorneo - Id del torneo 
+	 * @param nSpots - Numero de lugares a aumentar 
+	 * @return Query ->
+	 * START TRANSACTION;
+	 * USE `Spartan`;
+	 * UPDATE `Spartan`.`SoloTournamentEvents`
+	 * SET nSpots = nSpots + 3
+	 * WHERE idSoloEvent = 1 AND idSoloTournament = 1;
+	 * COMMIT;
+	 */
+	public String updateGroupTournamentEventSpots(int idEvent, int idTorneo, int nSpots)
 	{
-		return null;
-	}
-
-	public String registerTeamGroupTournamentEvent()
-	{
-		return null;
+		String query = 
+				"START TRANSACTION;" + "\n" + 
+				"USE `Spartan`;" + "\n" + 
+				"UPDATE `Spartan`.`GroupTournamentEvents`" + "\n" +
+				"SET nSpots = nSpots + " + nSpots + "\n" + 
+				"WHERE idGroupEvent = " + idEvent + " AND idGroupTournament = " + idTorneo  + ";" + "\n" +
+				"COMMIT;";
+		return query;
 	}
 	
-	public String removeTeamGroupTournamentEvent()
+	/**
+	 * Retorna la Query para cancelar un evento grupal  
+	 * @param idEvent - Es el id del evento 
+	 * @return Query ->
+	 * START TRANSACTION;
+	 * USE `Spartan`;
+	 * DELETE FROM `Spartan`.`GroupTournamentParticipants`
+	 * WHERE idGroupEvent = 1 ;
+	 * DELETE FROM `Spartan`.`GroupTournamentEvents`
+	 * WHERE idGroupEvent = 1 ;
+	 * COMMIT;
+	 */
+	public String cancelGroupTournamentEvent(int idEvent)
 	{
-		return null;
+		String query = 
+				"START TRANSACTION;" + "\n" + 
+				"USE `Spartan`;" + "\n" + 
+				"DELETE FROM `Spartan`.`GroupTournamentParticipants`" + "\n" + 
+				"WHERE idGroupEvent = " + idEvent +" ;" + "\n" +  
+				"DELETE FROM `Spartan`.`GroupTournamentEvents`" + "\n" + 
+				"WHERE idGroupEvent = " + idEvent + " ;" + "\n" +  
+				"COMMIT;";
+		return query;
 	}
 	
 	//------------------------------------------------------------------
@@ -802,6 +880,21 @@ public class ScriptGenerator
 		return query;
 	}
 	
+	/** 
+	 * Retorna la Query para registrar un evento en un torneo 
+	 * @param idTorneo - Id del torneo 
+	 * @param date - Fecha del evento 
+	 * @param state - Estado 
+	 * @param place - Lugar 
+	 * @param details - Detalles adicionales
+	 * @param nSpots - Lugares dispo
+	 * @param key - Llave del evento 
+	 * @return Query ->
+	 * START TRANSACTION;
+	 * USE `Spartan`;
+	 * INSERT INTO `Spartan`.`SoloTournamentEvents` (`idSoloTournament`, `Date`, `State`, `Place`, `Details`, `nSpots`, `Key`) VALUES (1, 'xx', 'yy', 'xy', 'Ola ke ase', 10, '2312');
+	 * COMMIT;
+	 */
 	public String registerSoloTournamentEvent(int idTorneo, String date, String state, String place, String details, int nSpots, String key)
 	{
 		String query = 
@@ -812,10 +905,80 @@ public class ScriptGenerator
 		return query;
 	}
 	
+	/**
+	 * Retorna la Query para registrar un equipo en un evento de torneo
+	 * @param idEquipo - Id del equipo
+	 * @param idEvento - Id del torneo 
+	 * @return Query ->
+	 * START TRANSACTION;
+	 * USE `Spartan`;
+	 * INSERT INTO `Spartan`.`SoloEventParticipants` (`idSoloEvent`, `idSoloPart`) VALUES (1 , 3);
+	 * COMMIT;
+	 */
+	public String registerSoloInGroupTournamentEvent(int idSolo, int idEvento)
+	{
+		String query = 
+				"START TRANSACTION;" + "\n" + 
+				"USE `Spartan`;" + "\n" + 
+				"INSERT INTO `Spartan`.`SoloEventParticipants` (`idSoloEvent`, `idSoloPart`) VALUES (" + idEvento + " , " + idSolo + ");" + "\n" +
+				"COMMIT;";
+		return query;
+	}
+	
+	/**
+	 * Retorna la Query para actualizar el numero de lugares disponibles en un evento de torneo 
+	 * @param idEvent - Id del evento 
+	 * @param idTorneo - Id del torneo 
+	 * @param nSpots - Numero de lugares a aumentar 
+	 * @return Query ->
+	 * START TRANSACTION;
+	 * USE `Spartan`;
+	 * UPDATE `Spartan`.`SoloTournamentEvents`
+	 * SET nSpots = nSpots + 3
+	 * WHERE idSoloEvent = 1 AND idSoloTournament = 1;
+	 * COMMIT;
+	 */
+	public String updateSoloTournamentEventSpots(int idEvent, int idTorneo, int nSpots)
+	{
+		String query = 
+				"START TRANSACTION;" + "\n" + 
+				"USE `Spartan`;" + "\n" + 
+				"UPDATE `Spartan`.`SoloTournamentEvents`" + "\n" +
+				"SET nSpots = nSpots + " + nSpots + "\n" + 
+				"WHERE idSoloEvent = " + idEvent + " AND idSoloTournament = " + idTorneo  + ";" + "\n" +
+				"COMMIT;";
+		return query;
+	}
+	
+	/**
+	 * Retorna la Query para cancelar un evento grupal  
+	 * @param idEvent - Es el id del evento 
+	 * @return Query ->
+	 * START TRANSACTION;
+	 * USE `Spartan`;
+	 * DELETE FROM `Spartan`.`GroupTournamentParticipants`
+	 * WHERE idGroupEvent = 1 ;
+	 * DELETE FROM `Spartan`.`GroupTournamentEvents`
+	 * WHERE idGroupEvent = 1 ;
+	 * COMMIT;
+	 */
+	public String cancelSoloTournamentEvent(int idEvent)
+	{
+		String query = 
+				"START TRANSACTION;" + "\n" + 
+				"USE `Spartan`;" + "\n" + 
+				"DELETE FROM `Spartan`.`SoloEventParticipants`" + "\n" + 
+				"WHERE idSoloEvent = " + idEvent +" ;" + "\n" +  
+				"DELETE FROM `Spartan`.`SoloTournamentEvents`" + "\n" + 
+				"WHERE idSoloEvent = " + idEvent + " ;" + "\n" +  
+				"COMMIT;";
+		return query;
+	}
+	
 	public static void main(String args[])
 	{
 		ScriptGenerator gen = new ScriptGenerator();
-		//updateTeamInTournament
-		System.out.println(gen.registerSoloTournamentEvent(1, "xx", "yy", "xy", "Ola ke ase", 10, "2312"));
+		//updateGroupTournamentEventSpots
+		System.out.println(gen.cancelSoloTournamentEvent(1));
 	}
 }

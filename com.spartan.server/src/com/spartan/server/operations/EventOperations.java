@@ -7,6 +7,8 @@ import com.spartan.server.core.DateParse;
 import com.spartan.server.db.DBService;
 import com.spartan.server.db.ScriptGenerator;
 import com.spartan.server.entities.Event;
+import com.spartan.server.entities.SingleEvent;
+import com.spartan.server.entities.User;
 import com.spartan.server.enums.State;
 
 /**
@@ -151,6 +153,11 @@ public class EventOperations {
 	// Regular event
 	// ------------------------------------------------------------------
 	
+	public void addParticipantSingleEvent(SingleEvent e, User nU){
+		e.addParticipant(nU);
+//		String q = scriptGen.updateEvent(E);
+//		dbService.sendQueryToDB(q);
+	}
 	
 
 }

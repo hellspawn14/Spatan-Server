@@ -26,7 +26,7 @@ public class Team
 	/**
 	 * Tabla de hash con los miembros del equipo
 	 */
-	private Hashtable<Integer, String> miembros;
+	private Hashtable<Integer, User> miembros;
 	
 	//------------------------------------------------------------------
 	//Construtores
@@ -43,10 +43,10 @@ public class Team
 		this.setIdTeam(idTeam);
 		this.teamName = teamName;
 		this.teamLeader = teamLeader;
-		miembros = new Hashtable <Integer, String>();
+		miembros = new Hashtable <Integer, User>();
 		
 		//Agrega al lider 
-		miembros.put((teamLeader.getUserName()).hashCode(), teamLeader.getUserName());
+		miembros.put((teamLeader.getUserName()).hashCode(), teamLeader);
 	}
 
 	
@@ -85,14 +85,14 @@ public class Team
 	/**
 	 * @return the miembros
 	 */
-	public Hashtable<Integer, String> getMiembros() {
+	public Hashtable<Integer, User> getMiembros() {
 		return miembros;
 	}
 
 	/**
 	 * @param miembros the miembros to set
 	 */
-	public void setMiembros(Hashtable<Integer, String> miembros) {
+	public void setMiembros(Hashtable<Integer, User> miembros) {
 		this.miembros = miembros;
 	}
 

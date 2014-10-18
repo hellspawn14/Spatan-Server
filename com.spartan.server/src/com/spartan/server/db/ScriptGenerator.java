@@ -434,53 +434,356 @@ public class ScriptGenerator
 		return query;
 	}
 	
-	public String updateEventState()
+	/**
+	 * Retorna la Query para consultar el catalogo publico de eventos 
+	 * @return Query -> 
+	 * SELECT * FROM `Spartan`.`PublicEvents`
+	 */
+	public String getPublicEventCatalog()
 	{
-		
+		String query = 
+				"SELECT * FROM `Spartan`.`PublicEvents`;";
+		return query;
+	}
+	
+	/**
+	 * Retorna la Query para registrar un usuario en un evento del catalogo publico 
+	 * @param publicEventId - Es el identificador del evento  
+	 * @param userId - Es el identificador del usuario 
+	 * @return Query ->
+	 * START TRANSACTION;
+	 * USE `Spartan`;
+	 * INSERT INTO `Spartan`.`EventAssistence` (`idPublicEvent`, `idUserEvent`, `State`) VALUES (1 , 2, 'ToAssist');
+	 * COMMIT;
+	 */
+	public String registerPublicEventAssistence(int publicEventId, int userId)
+	{
+		String query = 
+				"START TRANSACTION;" + "\n" + 
+				"USE `Spartan`;" + "\n" + 
+				"INSERT INTO `Spartan`.`EventAssistence` (`idPublicEvent`, `idUserEvent`, `State`) VALUES (" + publicEventId + " , " + userId + ", 'ToAssist');" + "\n" + 
+				"COMMIT;";
+		return query;
+	}
+	
+	/**
+	 * Retorna la Query para cancelar la asistencia a un evento publico de un usuario
+	 * @param eventId - Es el id del evento 
+	 * @param userId - Es el id del usuario 
+	 * @return Query ->
+	 * START TRANSACTION;
+	 * USE `Spartan`;
+	 * DELETE FROM `Spartan`.`EventAssistence`
+	 * WHERE idPublicEvent = 1 AND idUserEvent = 2 ;
+	 * COMMIT;
+	 */
+	public String cancelPublicEvent(int eventId, int userId)
+	{
+		String query = 
+				"START TRANSACTION;" + "\n" + 
+				"USE `Spartan`;" + "\n" + 
+				"DELETE FROM `Spartan`.`EventAssistence`" + "\n" + 
+				"WHERE idPublicEvent = " + eventId + " AND idUserEvent = " + userId + " ;" + "\n" +  
+				"COMMIT;";		
+		return query;
+	}
+	
+	/**
+	 * Retorna la Query para actualizar el estado de una asistencia 
+	 * @param eventId - Es el identificador del evento 
+	 * @param userId - Es el identificador del usuario 
+	 * @param nState - Es el estado de la asistencia
+	 * @return Query ->
+	 * START TRANSACTION;
+	 * USE `Spartan`;
+	 * UPDATE `Spartan`.`EventAssistence`
+	 * SET State = 'Ola ke asse'
+	 * WHERE idPublicEvent = 1 AND idUserEvent = 1;
+	 * COMMIT;
+	 */
+	public String updatePublicEventState(int eventId, int userId, String nState)
+	{
+		String query = 
+				"START TRANSACTION;" + "\n" + 
+				"USE `Spartan`;" + "\n" + 
+				"UPDATE `Spartan`.`EventAssistence`" + "\n" +
+				"SET State = '" + nState + "'" + "\n" + 
+				"WHERE idPublicEvent = " + eventId + " AND idUserEvent = " + userId + ";" + "\n" + 
+				"COMMIT;";
+		return query;
 	}
 	
 	//------------------------------------------------------------------
 	//Servicios torneo grupal
 	//------------------------------------------------------------------
 
-	public String createGroupTournament()
+	/**
+	 * Retorna la Query para crear un torneo grupal 
+	 * @param name - Nombre del torneo 
+	 * @param description - Descripcion del torneo 
+	 * @param sport - Deporte 
+	 * @param state - Estado  
+	 * @param idOrganizer - Organizador
+	 * @param nParticipants - Numero de participantes 
+	 * @return Query ->
+	 * START TRANSACTION;
+	 * USE `Spartan`;
+	 * INSERT INTO `Spartan`.`GroupTournament` (`Name`, `Description`, `Sport`, `State`, `idOrganizerSolo`, `nParticipants`) VALUES ('Ola ke ase' , 'Sexy torneo' , 'Soccer', 'Open' , 1 , 5);
+	 * COMMIT;
+	 */
+	public String createGroupTournament(String name, String description, String sport, String state, int idOrganizer, int nParticipants)
 	{
-		
+		String query = 
+				"START TRANSACTION;" + "\n" + 
+				"USE `Spartan`;" + "\n" + 
+				"INSERT INTO `Spartan`.`GroupTournaments` (`Name`, `Description`, `Sport`, `State`, `idOrganizerGroup`, `nParticipants`) VALUES ('" + name + "' , '" + description + "' , '" + sport + "', '" + state + "' , " +  idOrganizer + " , " + nParticipants + ");" + "\n" + 
+				"COMMIT;";
+		return query;
 	}
 	
-	public String cancelGroupTournament()
+	/**
+	 * Retorna la Query para eliminar un torneo de la base de datos 
+	 * @param idTorneo - Es el identificador del torneo
+	 * @param idOrganizador - Es el identificador del organizador
+	 * @return Query ->
+	 * START TRANSACTION;
+	 * USE `Spartan`;
+	 * DELETE FROM `Spartan`.`GroupTournamentParticipants` WHERE idGroupEvent = (SELECT idGroupEvent FROM `Spartan`.`GroupTournamentEvents` WHERE idGroupTournament = 1);
+	 * DELETE FROM `Spartan`.`ParticipantGroups` WHERE idGroupTournament = 1;
+	 * DELETE FROM `Spartan`.`GroupTournamentEvents` WHERE idGroupTournament = 1;
+	 * DELETE FROM `Spartan`.`GroupTournaments` WHERE idTournament = 1;
+	 * COMMIT;
+	 */
+	public String cancelGroupTournament(int idTorneo, int idOrganizador)
 	{
-		
+		String subQuery = "(SELECT idGroupEvent FROM `Spartan`.`GroupTournamentEvents` WHERE idGroupTournament = " + idTorneo + ")";
+		String query = 
+				"START TRANSACTION;" + "\n" + 
+				"USE `Spartan`;" + "\n" + 
+				"DELETE FROM `Spartan`.`GroupTournamentParticipants` WHERE idGroupEvent = "  + subQuery + ";" + "\n" +
+				"DELETE FROM `Spartan`.`ParticipantGroups` WHERE idGroupTournament = " + idTorneo + ";" + "\n" + 
+				"DELETE FROM `Spartan`.`GroupTournamentEvents` WHERE idGroupTournament = " + idTorneo + ";" + "\n" + 
+				"DELETE FROM `Spartan`.`GroupTournaments` WHERE idTournament = " + idTorneo + ";" + "\n" + 
+				"COMMIT;";
+		return query;
 	}
 	
-	public String registerTeamInTournament()
+	/**
+	 * Retorna la Query para registrar un participante en un torneo 
+	 * @param idTorneo - Id del torneo 
+	 * @param idEquipo - Id del equipo
+	 * @return Query ->
+	 * START TRANSACTION;
+	 * USE `Spartan`;
+	 * INSERT INTO `Spartan`.`ParticipantGroups` (`ParticipantGroups`, `ParticipantGroups`, `State`, `Position`) VALUES (1 , 2 ,  'In', 0);
+	 * COMMIT;
+	 */
+	public String registerTeamInTournament(int idTorneo, int idEquipo)
 	{
-		
+		String query = 
+				"START TRANSACTION;" + "\n" + 
+				"USE `Spartan`;" + "\n" + 
+				"INSERT INTO `Spartan`.`ParticipantGroups` (`ParticipantGroups`, `idParticipantTeam`, `State`, `Position`) VALUES (" + idTorneo + " , " + idEquipo + " ,  'In', 0);" + "\n" + 
+				"COMMIT;";
+		return query;
 	}
 	
-	public String removeTeamFromTournament()
+	/**
+	 * Retorna la Query para eliminar un participante de un torneo grupal 
+	 * @param idTorneo - Es el id del torneo
+	 * @param idEquipo - Id del equipo 
+	 * @return Query ->
+	 * START TRANSACTION;
+	 * USE `Spartan`;
+	 * DELETE FROM `Spartan`.`GroupTournamentParticipants` WHERE idParticipantTeam = 1;
+	 * DELETE FROM `Spartan`.`ParticipantGroups` WHERE idGroupTournament = 2 AND idParticipantTeam = 1;
+	 * COMMIT;
+	 */
+	public String removeTeamFromTournament(int idTorneo, int idEquipo)
 	{
-		
+		String query = 
+				"START TRANSACTION;" + "\n" + 
+				"USE `Spartan`;" + "\n" + 
+				"DELETE FROM `Spartan`.`GroupTournamentParticipants` WHERE idParticipantTeam = " + idEquipo + ";" + "\n" +
+				"DELETE FROM `Spartan`.`ParticipantGroups` WHERE idGroupTournament = " + idTorneo + " AND idParticipantTeam = " + idEquipo + ";" + "\n" + 
+				"COMMIT;";
+		return query;
+	}
+	
+	/**
+	 * Retorna la query para actualizar los datos de un participante en un torneo 
+	 * @param idTournament - Id del torneo 
+	 * @param idEquipo - Id del equipo
+	 * @param nState - Estado 
+	 * @param nPosition - Posicion en el torneo 
+	 * @return Query ->
+	 * START TRANSACTION;
+	 * USE `Spartan`;
+	 * UPDATE `Spartan`.`ParticipantGroups`
+	 * SET State = 'Ola ke ase' , Position = 14
+	 * WHERE idGroupTournament = 1 AND idParticipantTeam = 1;
+	 * COMMIT;
+	 */
+	public String updateTeamInTournament(int idTournament, int idEquipo, String nState, int nPosition)
+	{
+		String query = 
+				"START TRANSACTION;" + "\n" + 
+				"USE `Spartan`;" + "\n" + 
+				"UPDATE `Spartan`.`ParticipantGroups`" +  "\n" + 
+				"SET State = '" + nState + "' , Position = " + nPosition +  "\n" + 
+				"WHERE idGroupTournament = " + idTournament + " AND idParticipantTeam = " + idEquipo + ";" + "\n" + 
+				"COMMIT;";
+		return query;
 	}
 	
 	public String registerGroupTournamentEvent()
 	{
 		
+		return null;
 	}
 	
 	public String updateGroupTournamentEventSpots()
 	{
-		
+		return null;
 	}
 
 	public String registerTeamGroupTournamentEvent()
 	{
-		
+		return null;
+	}
+	
+	public String removeTeamGroupTournamentEvent()
+	{
+		return null;
+	}
+	
+	//------------------------------------------------------------------
+	//Servicios torneo individual
+	//------------------------------------------------------------------
+
+	/**
+	 * Retorna la Query para crear un torneo individual 
+	 * @param name - Nombre del torneo 
+	 * @param description - Descripcion del torneo 
+	 * @param sport - Deporte 
+	 * @param state - Estado  
+	 * @param idOrganizer - Organizador
+	 * @param nParticipants - Numero de participantes 
+	 * @return Query ->
+	 * START TRANSACTION;
+	 * USE `Spartan`;
+	 * INSERT INTO `Spartan`.`SoloTournament` (`Name`, `Description`, `Sport`, `State`, `idOrganizerSolo`, `nParticipants`) VALUES ('Ola ke ase' , 'Sexy torneo' , 'Soccer', 'Open' , 1 , 5);
+	 * COMMIT;
+	 */
+	public String createSingleTournament(String name, String description, String sport, String state, int idOrganizer, int nParticipants)
+	{
+		String query = 
+				"START TRANSACTION;" + "\n" + 
+				"USE `Spartan`;" + "\n" + 
+				"INSERT INTO `Spartan`.`SoloTournament` (`Name`, `Description`, `Sport`, `State`, `idOrganizerSolo`, `nParticipants`) VALUES ('" + name + "' , '" + description + "' , '" + sport + "', '" + state + "' , " +  idOrganizer + " , " + nParticipants + ");" + "\n" + 
+				"COMMIT;";
+		return query;
+	}
+	
+	/**
+	 * Retorna la Query para eliminar un torneo de la base de datos 
+	 * @param idTorneo - Es el identificador del torneo
+	 * @param idOrganizador - Es el identificador del organizador
+	 * @return Query ->
+	 * START TRANSACTION;
+	 * USE `Spartan`;
+	 * DELETE FROM `Spartan`.`GroupTournamentParticipants` WHERE idGroupEvent = (SELECT idGroupEvent FROM `Spartan`.`GroupTournamentEvents` WHERE idGroupTournament = 1);
+	 * DELETE FROM `Spartan`.`ParticipantGroups` WHERE idGroupTournament = 1;
+	 * DELETE FROM `Spartan`.`GroupTournamentEvents` WHERE idGroupTournament = 1;
+	 * DELETE FROM `Spartan`.`GroupTournaments` WHERE idTournament = 1;
+	 * COMMIT;
+	 */
+	public String cancelSoloTournament(int idTorneo, int idOrganizador)
+	{
+		String subQuery = "(SELECT idSoloEvent FROM `Spartan`.`SoloTournamentEvents` WHERE idSoloTournament = " + idTorneo + ")";
+		String query = 
+				"START TRANSACTION;" + "\n" + 
+				"USE `Spartan`;" + "\n" + 
+				"DELETE FROM `Spartan`.`SoloEventParticipants` WHERE idSoloEvent = "  + subQuery + ";" + "\n" +
+				"DELETE FROM `Spartan`.`ParticipantsSolo` WHERE idTournamentSolo = " + idTorneo + ";" + "\n" + 
+				"DELETE FROM `Spartan`.`SoloTournamentEvents` WHERE idSoloTournament = " + idTorneo + ";" + "\n" + 
+				"DELETE FROM `Spartan`.`SoloTournament` WHERE idTournament = " + idTorneo + ";" + "\n" + 
+				"COMMIT;";
+		return query;
+	}
+	
+	/**
+	 * Retorna la Query para registrar un participante en un torneo 
+	 * @param idTorneo - Id del torneo 
+	 * @param idEquipo - Id del equipo
+	 * @return Query ->
+	 * START TRANSACTION;
+	 * USE `Spartan`;
+	 * INSERT INTO `Spartan`.`ParticipantsSolo` (`idSoloParticipant`, `idTournamentSolo`, `State`, `Position`) VALUES (1 , 2 ,  'In', 0);
+	 * COMMIT;
+	 */
+	public String registerSoloInTournament(int idTorneo, int idSolo)
+	{
+		String query = 
+				"START TRANSACTION;" + "\n" + 
+				"USE `Spartan`;" + "\n" + 
+				"INSERT INTO `Spartan`.`ParticipantsSolo` (`idSoloParticipant`, `idTournamentSolo`, `State`, `Position`) VALUES (" + idSolo + " , " + idTorneo + " ,  'In', 0);" + "\n" + 
+				"COMMIT;";
+		return query;
+	}
+
+	/**
+	 * Retorna la Query para eliminar un participante de un torneo solo 
+	 * @param idTorneo - Es el id del torneo
+	 * @param idEquipo - Id del equipo 
+	 * @return Query ->
+	 * START TRANSACTION;
+	 * USE `Spartan`;
+	 * DELETE FROM `Spartan`.`GroupTournamentParticipants` WHERE idParticipantTeam = 1;
+	 * DELETE FROM `Spartan`.`ParticipantGroups` WHERE idGroupTournament = 2 AND idParticipantTeam = 1;
+	 * COMMIT;
+	 */
+	public String removeSoloFromTournament(int idTorneo, int idEquipo)
+	{
+		String query = 
+				"START TRANSACTION;" + "\n" + 
+				"USE `Spartan`;" + "\n" + 
+				"DELETE FROM `Spartan`.`SoloEventParticipants` WHERE idSoloPart = " + idEquipo + ";" + "\n" +
+				"DELETE FROM `Spartan`.`ParticipantsSolo` WHERE idTournamentSolo = " + idTorneo + " AND idSoloParticipant = " + idEquipo + ";" + "\n" + 
+				"COMMIT;";
+		return query;
+	}
+	
+	/**
+	 * Retorna la query para actualizar los datos de un participante en un torneo 
+	 * @param idTournament - Id del torneo 
+	 * @param idEquipo - Id del equipo
+	 * @param nState - Estado 
+	 * @param nPosition - Posicion en el torneo 
+	 * @return Query ->
+	 * START TRANSACTION;
+	 * USE `Spartan`;
+	 * UPDATE `Spartan`.`ParticipantGroups`
+	 * SET State = 'Ola ke ase' , Position = 14
+	 * WHERE idGroupTournament = 1 AND idParticipantTeam = 1;
+	 * COMMIT;
+	 */
+	public String updateSoloInTournament(int idTournament, int idSolo, String nState, int nPosition)
+	{
+		String query = 
+				"START TRANSACTION;" + "\n" + 
+				"USE `Spartan`;" + "\n" + 
+				"UPDATE `Spartan`.`ParticipantsSolo`" +  "\n" + 
+				"SET State = '" + nState + "' , Position = " + nPosition +  "\n" + 
+				"WHERE idTournamentSolo = " + idTournament + " AND idSoloParticipant = " + idSolo + ";" + "\n" + 
+				"COMMIT;";
+		return query;
 	}
 	
 	public static void main(String args[])
 	{
 		ScriptGenerator gen = new ScriptGenerator();
-		System.out.println(gen.updateSpotConfirmation(1, 2, "Ola ke ase"));
+		//updateTeamInTournament
+		System.out.println(gen.updateSoloInTournament(1, 2, "Ola ke ase", 14));
 	}
 }

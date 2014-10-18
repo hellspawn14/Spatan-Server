@@ -30,6 +30,11 @@ public class Spartan
 	 * Lista de torneos actuales
 	 */
 	private Hashtable <Integer, Tournament> currentTournaments;
+	
+	/**
+	 * Lista de eventos publicos 
+	 */
+	private Hashtable <Integer, PublicEvent> publicCatalog;
 
 
 	//------------------------------------------------------------------
@@ -98,6 +103,20 @@ public class Spartan
 	public void setCurrentTournaments(
 			Hashtable<Integer, Tournament> currentTournaments) {
 		this.currentTournaments = currentTournaments;
+	}
+
+	/**
+	 * @return the publicCatalog
+	 */
+	public Hashtable <Integer, PublicEvent> getPublicCatalog() {
+		return publicCatalog;
+	}
+
+	/**
+	 * @param publicCatalog the publicCatalog to set
+	 */
+	public void setPublicCatalog(Hashtable <Integer, PublicEvent> publicCatalog) {
+		this.publicCatalog = publicCatalog;
 	}
 	
 	

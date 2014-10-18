@@ -6,7 +6,7 @@ package com.spartan.server.db;
  * @author hellspawn
  */
 public class ScriptGenerator 
-{
+{	
 	//------------------------------------------------------------------
 	//Servicios de usuario 
 	//------------------------------------------------------------------
@@ -973,12 +973,5 @@ public class ScriptGenerator
 				"WHERE idSoloEvent = " + idEvent + " ;" + "\n" +  
 				"COMMIT;";
 		return query;
-	}
-	
-	public static void main(String args[])
-	{
-		ScriptGenerator gen = new ScriptGenerator();
-		//updateGroupTournamentEventSpots
-		System.out.println(gen.cancelSoloTournamentEvent(1));
 	}
 }

@@ -85,6 +85,8 @@ public class EventOperations {
 	 */
 	public void changeDetails(Event E, String details) {
 		E.setDetails(details);
+		// String q =scriptGen.updateEvent(E);
+		// dbService.sendQueryToDB(q);
 	}
 
 	/**
@@ -154,9 +156,10 @@ public class EventOperations {
 	// ------------------------------------------------------------------
 	
 	public void addParticipantSingleEvent(SingleEvent e, User nU){
-		e.addParticipant(nU);
+		boolean posible =e.addParticipant(nU);
+//		if(posible){
 //		String q = scriptGen.updateEvent(E);
-//		dbService.sendQueryToDB(q);
+//		dbService.sendQueryToDB(q);}
 	}
 	
 

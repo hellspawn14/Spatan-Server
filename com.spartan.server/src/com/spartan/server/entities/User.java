@@ -38,9 +38,14 @@ public class User
 	private ArrayList <Spot> currentSpots;
 	
 	/**
-	 * Lista de eventos actuales
+	 * Lista de eventos actuales creados por el usuario 
 	 */
 	private ArrayList <RegularEvent> myCurrentEvents;
+	
+	/**
+	 * Lista de eventos publicos a los que asiste el usuario
+	 */
+	private ArrayList <PublicEvent> publicEvents;
 	
 	/**
 	 * Lista de torneos organizados por el usuario 
@@ -66,6 +71,7 @@ public class User
 		setMyCurrentEvents(new ArrayList<RegularEvent>());
 		setCurrentSpots(new ArrayList <Spot>());
 		setMyTournaments(new ArrayList <Tournament>());
+		setPublicEvents(new ArrayList <PublicEvent>());
 	}
 
 	//------------------------------------------------------------------
@@ -169,5 +175,19 @@ public class User
 	 */
 	public void setMyTournaments(ArrayList <Tournament> myTournaments) {
 		this.myTournaments = myTournaments;
+	}
+
+	/**
+	 * @return the publicEvents
+	 */
+	public ArrayList <PublicEvent> getPublicEvents() {
+		return publicEvents;
+	}
+
+	/**
+	 * @param publicEvents the publicEvents to set
+	 */
+	public void setPublicEvents(ArrayList <PublicEvent> publicEvents) {
+		this.publicEvents = publicEvents;
 	}
 }

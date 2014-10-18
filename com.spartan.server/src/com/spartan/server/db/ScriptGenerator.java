@@ -636,9 +636,29 @@ public class ScriptGenerator
 		return query;
 	}
 	
-	public String registerGroupTournamentEvent()
+	/**
+	 * Retorna la Query para registrar 
+	 * @param idTorneo
+	 * @param date
+	 * @param state
+	 * @param place
+	 * @param details
+	 * @param nSpots
+	 * @param key
+	 * @return
+	 */
+	public String registerGroupTournamentEvent(int idTorneo, String date, String state, String place, String details, int nSpots, String key)
 	{
-		
+		String query = 
+				"START TRANSACTION;" + "\n" + 
+				"USE `Spartan`;" + "\n" + 
+				"INSERT INTO `Spartan`.`GroupTournamentEvents` (`idGroupTournament`, `Date`, `State`, `Place`, `Details`, `nSpots`, `Key`) VALUES (" + idTorneo + ", '" + date + "', '" + state + "', '" + place + "', '" + details + "', " + nSpots + ", '" + key + "');" + 
+				"COMMIT;";
+		return query;
+	}
+	
+	public String registerTeamInGroupTournamentEvent()
+	{
 		return null;
 	}
 	
@@ -780,10 +800,20 @@ public class ScriptGenerator
 		return query;
 	}
 	
+	public String registerSoloTournamentEvent(int idTorneo, String date, String state, String place, String details, int nSpots, String key)
+	{
+		String query = 
+				"START TRANSACTION;" + "\n" + 
+				"USE `Spartan`;" + "\n" + 
+				"INSERT INTO `Spartan`.`SoloTournamentEvents` (`idSoloTournament`, `Date`, `State`, `Place`, `Details`, `nSpots`, `Key`) VALUES (" + idTorneo + ", '" + date + "', '" + state + "', '" + place + "', '" + details + "', " + nSpots + ", '" + key + "');" + "\n" + 
+				"COMMIT;";
+		return query;
+	}
+	
 	public static void main(String args[])
 	{
 		ScriptGenerator gen = new ScriptGenerator();
 		//updateTeamInTournament
-		System.out.println(gen.updateSoloInTournament(1, 2, "Ola ke ase", 14));
+		System.out.println(gen.registerSoloTournamentEvent(1, "xx", "yy", "xy", "Ola ke ase", 10, "2312"));
 	}
 }

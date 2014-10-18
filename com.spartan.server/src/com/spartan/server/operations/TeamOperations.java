@@ -70,6 +70,12 @@ public class TeamOperations {
 	 */
 	public void setTeamName(Team t, String teamName) {
 		t.setTeamName(teamName);
+//		String q = scriptGen.changeTeamName(t.getIdTeam(), teamName);
+//		try {
+//			dbService.sendQueryToDB(q);
+//		} catch (SQLException e) {
+//
+//		}
 	}
 
 	/**
@@ -81,27 +87,43 @@ public class TeamOperations {
 	 */
 	public void setTeamLeader(Team t, User teamLeader) {
 		t.setTeamLeader(teamLeader);
+		String q = scriptGen.changeTeamLeader(t.getIdTeam(), teamLeader.getUserId());
+		try {
+			dbService.sendQueryToDB(q);
+		} catch (SQLException e) {
+
+		}
+		
 	}
 
 	/**
-	 * Updates a team's set of members
+	 * Adds a member to the team
 	 * 
-	 * @param t
-	 *            the team
+	 * @param t the Team
 	 * @param miembros
 	 */
-	public void setMiembros(Team t, Hashtable<Integer, String> miembros) {
-		t.setMiembros(miembros);
-	}
+	public void setNewMember(Team t, User nMember) {
+		String q = scriptGen.registerUserInTeam(t.getIdTeam(), nMember.getUserId());
+		try {
+			dbService.sendQueryToDB(q);
+		} catch (SQLException e) {
 
-	/**
-	 * Updates a team's ids
-	 * 
-	 * @param t
-	 *            the team
-	 * @param idTeam
-	 */
-	public void setIdTeam(Team t, int idTeam) {
-		t.setIdTeam(idTeam);
+		}
 	}
+	/**
+	 * 
+	 * @param t theTeam
+	 * @param toRemove
+	 */
+	public void removeMember(Team t, User toRemove)
+	{
+		String q = scriptGen.removeUserFromTeam(t.getIdTeam(), toRemove.getUserId());
+		try {
+			dbService.sendQueryToDB(q);
+		} catch (SQLException e) {
+
+		}
+	}
+	
+	//cant actually understand why do we do all thi stuff
 }

@@ -70,7 +70,7 @@ public class DBService
 	public ResultSet sendQueryToDB(String Query) throws SQLException 
 	{
 		try 
-		{
+		{ 
 			connectToDB();
 			resultSet = statement.executeQuery(Query);
 		} 
@@ -79,5 +79,19 @@ public class DBService
 			e.printStackTrace();
 		}
 		return resultSet;
+	}
+	
+	public void close()
+	{
+		try 
+		{
+			statement.close();
+			DBConnection.close();
+			resultSet.close();
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

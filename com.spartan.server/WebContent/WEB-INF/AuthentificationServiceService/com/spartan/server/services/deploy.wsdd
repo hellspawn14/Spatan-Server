@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from AuthentificationServiceService WSDL service -->
+
+  <service name="AuthentificationService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://services.server.spartan.com"/>
+      <parameter name="wsdlServiceElement" value="AuthentificationServiceService"/>
+      <parameter name="schemaQualified" value="http://services.server.spartan.com"/>
+      <parameter name="wsdlServicePort" value="AuthentificationService"/>
+      <parameter name="className" value="com.spartan.server.services.AuthentificationService"/>
+      <parameter name="wsdlPortType" value="AuthentificationService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://services.server.spartan.com" xmlns:retNS="http://services.server.spartan.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="logIn" qname="operNS:logIn" returnQName="retNS:logInReturn" returnType="rtns:int" soapAction="">
+        <parameter xmlns:pns="http://services.server.spartan.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:userName" type="tns:string"/>
+        <parameter xmlns:pns="http://services.server.spartan.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:password" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://services.server.spartan.com" xmlns:retNS="http://services.server.spartan.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="changePassword" qname="operNS:changePassword" returnQName="retNS:changePasswordReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://services.server.spartan.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:userName" type="tns:string"/>
+        <parameter xmlns:pns="http://services.server.spartan.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:oldPass" type="tns:string"/>
+        <parameter xmlns:pns="http://services.server.spartan.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:newPass" type="tns:string"/>
+      </operation>
+      <parameter name="allowedMethods" value="logIn changePassword"/>
+
+  </service>
+</deployment>

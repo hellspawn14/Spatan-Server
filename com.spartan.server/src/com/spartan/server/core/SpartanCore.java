@@ -1,23 +1,9 @@
 package com.spartan.server.core;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Set;
 
 import com.spartan.server.db.DBService;
-import com.spartan.server.entities.GroupEvent;
-import com.spartan.server.entities.GroupTournament;
-import com.spartan.server.entities.PublicEvent;
-import com.spartan.server.entities.RegularEvent;
-import com.spartan.server.entities.SingleEvent;
-import com.spartan.server.entities.SoloTournament;
 import com.spartan.server.entities.Spartan;
-import com.spartan.server.entities.Spot;
-import com.spartan.server.entities.Team;
-import com.spartan.server.entities.User;
-import com.spartan.server.entities.UserProfile;
+
 
 /**
  * Clase responsable de orquestar los servicios y las operaciones

@@ -12,7 +12,7 @@ import com.spartan.server.db.ScriptGenerator;
  * Servicio de autenticacion de usuarios 
  * @author hellspawn
  */
-@WebService(endpointInterface = "com.spartan.server.services.AuthentificationService")
+@WebService(endpointInterface = "com.spartan.server.services.authentification.AuthentificationService")
 public class AuthentificationServiceImpl implements AuthentificationService
 {
 	//------------------------------------------------------------------

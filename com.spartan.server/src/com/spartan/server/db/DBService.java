@@ -81,6 +81,12 @@ public class DBService
 		return resultSet;
 	}
 	
+	public void sendExcuteUpdate(String query) throws SQLException
+	{
+		statement.executeUpdate(query);
+	}
+
+	
 	public void close()
 	{
 		try 

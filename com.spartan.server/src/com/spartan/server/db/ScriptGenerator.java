@@ -50,6 +50,20 @@ public class ScriptGenerator
 		return query;
 	}
 	
+	public String getUserId(String userName)
+	{
+		String query = 
+				"SELECT idUser FROM Spartan.Users WHERE UserName = " + userName + ";";
+		return query;
+	}
+	
+	public String getUserAuth(String userName)
+	{
+		String query = "SELECT * FROM Spartan.Users INNER JOIN Spartan.Auth ON Spartan.Users.idUser = Spartan.Auth.idUserAuth WHERE Spartan.Users.UserName = '" + userName + "';";
+		return query;		
+	}
+	
+	
 	/**
 	 * Retorna la Query para actualizar la contraseña de un usuario 
 	 * @param userId - Es el id del usuario 
@@ -65,12 +79,7 @@ public class ScriptGenerator
 	public String updateUserPassword(int userId, String nPassword)
 	{
 		String query = 
-				"START TRANSACTION;" + "\n" + 
-				"USE `Spartan`;" + "\n" + 
-				"UPDATE `Spartan`.`Auth`" +  "\n" + 
-				"SET Password = " + "'" + nPassword + "'" + "\n" +  
-				"WHERE idUserAuth = " + userId + ";" + "\n" +
-				"COMMIT;"; 
+				"UPDATE Spartan.Auth" + " SET Password = " + "'" + nPassword + "'" + " WHERE idUserAuth = " + userId + ";"; 
 		return query;
 	}
 	

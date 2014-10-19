@@ -40,6 +40,11 @@ public abstract class Tournament
 	 * Numero max de participantes 
 	 */
 	private int nParticipants;
+	
+	/**
+	 * user
+	 */
+	private User organizer;
 
 	
 	//------------------------------------------------------------------
@@ -59,6 +64,7 @@ public abstract class Tournament
 	 */
 	public Tournament(int idTournament, String tournamentName,String tournamentDescription, String sport, String state,User organizer, int nParticipants)
 	{
+		this.organizer=organizer;
 		this.idTournament = idTournament;
 		this.tournamentName = tournamentName;
 		this.tournamentDescription = tournamentDescription;
@@ -162,5 +168,15 @@ public abstract class Tournament
 	 */
 	public void setnParticipants(int nParticipants) {
 		this.nParticipants = nParticipants;
+	}
+	
+	public User getOrganizer()
+	{
+		return organizer;
+	}
+	
+	public void setOrganizer(User nOrganizer)
+	{
+		this.organizer=nOrganizer;
 	}
 }

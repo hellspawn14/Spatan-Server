@@ -134,6 +134,8 @@ public class ScriptGenerator
 	//Servicios equipo
 	//------------------------------------------------------------------
 
+	//TODO changeTeamName(int idTeam, String nName)
+	
 	/**
 	 * Retorna la Query para crear un nuevo equipo 
 	 * @param teamName - Es el nombre del equipo 

@@ -52,6 +52,7 @@ public class AuthentificationServiceImpl implements AuthentificationService
 	 */
 	public int logIn(String userName, String password)  
 	{
+		System.out.println(userName + " - " + password);
 		int ans = 0;
 		String query = generator.getUserAuth(userName);
 		String passDB = null;

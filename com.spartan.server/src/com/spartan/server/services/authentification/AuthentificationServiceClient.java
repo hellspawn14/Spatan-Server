@@ -11,6 +11,7 @@ public class AuthentificationServiceClient
 	{
 
 		//http://localhost:9876/Auth
+		//TODO Cambiar IP a conveniencia
         URL url = new URL("http://157.253.227.203:9876/Auth?wsdl");
         QName qname = new QName("http://authentification.services.server.spartan.com/", "AuthentificationServiceImplService");
         // Create, in effect, a factory for the service.

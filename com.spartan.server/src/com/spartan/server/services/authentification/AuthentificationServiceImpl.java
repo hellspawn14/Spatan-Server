@@ -33,6 +33,9 @@ public class AuthentificationServiceImpl implements AuthentificationService
 	//Constructores
 	//------------------------------------------------------------------
 
+	/**
+	 * Crea una nueva instancia del servicio 
+	 */
 	public AuthentificationServiceImpl()
 	{
 		dbService = new DBService();

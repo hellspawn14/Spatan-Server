@@ -20,7 +20,7 @@ public class AuthentificationServiceClient
         // Extract the endpoint interface, the service "port".
 
         AuthentificationService eif = service.getPort(AuthentificationService.class);
-        System.out.println(eif.logIn("hellspawn", "Kira14"));
+        System.out.println(eif.logIn("hellspawn", "Kira142"));
   
    }
 }

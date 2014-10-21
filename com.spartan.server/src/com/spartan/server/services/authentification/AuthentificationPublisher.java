@@ -6,6 +6,6 @@ public class AuthentificationPublisher
 {
 	public static void main(String args[])
 	{
-		Endpoint.publish("http://localhost:9877/Auth", new AuthentificationServiceImpl());
+		Endpoint.publish("http://localhost:9876/Auth", new AuthentificationServiceImpl());
 	}
 }

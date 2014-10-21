@@ -9,7 +9,7 @@ public class AuthentificationServiceClient
 {
 	public static void main(String args[ ]) throws Exception 
 	{
-        URL url = new URL("http://localhost:9877/Auth?wsdl");
+        URL url = new URL("http://localhost:9876/Auth?wsdl");
         QName qname = new QName("http://authentification.services.server.spartan.com/", "AuthentificationServiceImplService");
         Service service = Service.create(url, qname);
         AuthentificationService eif = service.getPort(AuthentificationService.class);

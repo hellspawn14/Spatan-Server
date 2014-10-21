@@ -27,13 +27,39 @@ public class ScriptGenerator
 	public String registerUser(String userName,  String phoneNumber, String pass)
 	{	
 		String query = 
-				"START TRANSACTION;" + "\n" + 
-				"USE `Spartan`;"  + "\n" + 
-				"INSERT INTO `Spartan`.`Users` (`UserName`, `PhoneNumber`)" + "VALUES ('" + userName + "' , '" + phoneNumber + "');" + "\n" + 
-				"INSERT INTO `Spartan`.`Auth` (`idUserAuth`, `Password`) " +  "VALUES(" + "(SELECT idUser FROM `Spartan`.`Users` WHERE UserName = '" + userName + "')" + ", '" + pass + "');" + "\n" +
-				"INSERT INTO `Spartan`.`ScoreBoard` (`idUserBoard`, `Score`) " + "VALUES(" + "(SELECT idUser FROM `Spartan`.`Users` WHERE UserName = '" + userName + "')" + " , " + 0.0 + ");" + "\n" +
-				"INSERT INTO `Spartan`.`History` (`idUserHistory`, `nSoccer`, `nBasketball`, `nVoleyball`, `nTennis`, `nPaintball`, `nVideogames`, `nKarts`, `nVictories`, `nLoses`) " + "VALUES (" + "(SELECT idUser FROM `Spartan`.`Users` WHERE UserName = '" + userName + "')" + ", 0, 0, 0, 0, 0, 0, 0, 0, 0);" + "\n" +
-				"COMMIT;";
+				"INSERT INTO Spartan.Users (UserName, PhoneNumber)" + " VALUES ('" + userName + "', '" + phoneNumber + "');";
+				
+				// + "\n" +
+		return query;
+	}
+	
+	public String registerUserAuth(int userId, String pass)
+	{
+		String query = "INSERT INTO Spartan.Auth (idUserAuth, Password)" +  " VALUES(" + userId + ", '" + pass + "');";
+		return query;
+	}
+	
+	public String registerUserScore(int userId)
+	{
+		String query = "INSERT INTO Spartan.ScoreBoard (idUserBoard, Score) " + " VALUES(" + userId + " , " + 0.0 + ");";
+		return query;
+	}
+	
+	public String registerUserHistory(int userId)
+	{
+		String query = "INSERT INTO Spartan.History (idUserHistory,nSoccer, nBasketball, nVoleyball, nTennis, nPaintball, nVideogames, nKarts, nVictories, nLoses) " + " VALUES (" + userId + ", 0, 0, 0, 0, 0, 0, 0, 0, 0);";
+		return query;
+	}
+	
+	/**
+	 * Genera la query para obtener el id de un usuario a partir de su numero de telfono 
+	 * @param phoneNumber 
+	 * @return Query -> 
+	 * SELECT idUser FROM Spartan.Users WHERE PhoneNumber = '3172362158';
+	 */
+	public String getUserIdByPhone(String phoneNumber)
+	{
+		String query = "SELECT idUser FROM Spartan.Users WHERE PhoneNumber = '" + phoneNumber + "';";
 		return query;
 	}
 	
@@ -53,7 +79,7 @@ public class ScriptGenerator
 	public String getUserId(String userName)
 	{
 		String query = 
-				"SELECT idUser FROM Spartan.Users WHERE UserName = " + userName + ";";
+				"SELECT idUser FROM Spartan.Users WHERE UserName = '" + userName + "';";
 		return query;
 	}
 	

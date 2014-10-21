@@ -6,7 +6,6 @@ public class AuthentificationPublisher
 {
 	public static void main(String args[])
 	{
-		//TODO Cambiar IP a conveniencia
-		Endpoint.publish("http://157.253.227.203:9876/Auth", new AuthentificationServiceImpl());
+		Endpoint.publish("http://localhost:9877/Auth", new AuthentificationServiceImpl());
 	}
 }

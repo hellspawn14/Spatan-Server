@@ -1,5 +1,6 @@
 package com.spartan.server.services;
 
-public class TeamService {
-
+public class TeamService 
+{
+	
 }

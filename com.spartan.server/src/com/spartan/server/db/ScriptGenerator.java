@@ -28,8 +28,6 @@ public class ScriptGenerator
 	{	
 		String query = 
 				"INSERT INTO Spartan.Users (UserName, PhoneNumber)" + " VALUES ('" + userName + "', '" + phoneNumber + "');";
-				
-				// + "\n" +
 		return query;
 	}
 	
@@ -323,10 +321,7 @@ public class ScriptGenerator
 	public String createEvent(String sport, String description, String date, int eventAuthor, int availableSpots, String state, String place, String key, String details)
 	{
 		String query = 
-				"START TRANSACTION;" + "\n" + 
-				"USE `Spartan`;" + "\n" + 
-				"INSERT INTO `Spartan`.`Events` (`Sport`, `Description`, `Date`, `idEventAuthor`, `Spots`, `State`, `Place`, `Key`, `Details`) VALUES ('" + sport + "' , '" +  description + "' , '" + date + "' , " + eventAuthor + ", " + availableSpots + ", '" + state + "' , '" + place + "', '" + key + "', '" + details + "');" + "\n" + 
-				"COMMIT;";
+				"INSERT INTO `Spartan`.`Events` (`Sport`, `Description`, `Date`, `idEventAuthor`, `Spots`, `State`, `Place`, `Key`, `Details`) VALUES ('" + sport + "' , '" +  description + "' , '" + date + "' , " + eventAuthor + ", " + availableSpots + ", '" + state + "' , '" + place + "', '" + key + "', '" + details + "');"; 
 		return query;
 	}
 	
@@ -352,7 +347,13 @@ public class ScriptGenerator
 	public String getAllEventsSearch(String sport)
 	{
 		String query = 
-				"SELECT * FROM `Spartan`.`Events` WHERE Sport = '" + sport + "' AND Spots > 0;";
+				"SELECT * FROM `Spartan`.`Events` WHERE Sport = '" + sport + "' AND Spots > 0 AND State = 'Open';";
+		return query;
+	}
+	
+	public String getAllSpotsFromUser(String userId)
+	{
+		String query = "SELECT * FROM Spartan.Spots WHERE idParticipant = " + userId + ";";
 		return query;
 	}
 	
@@ -379,6 +380,36 @@ public class ScriptGenerator
 				"WHERE idEvent = " + eventId + ";" + "\n" + 
 				"INSERT INTO `Spartan`.`Spots` (`idEvent`, `idParticipant`, `Confirmation`) VALUES (" + eventId + ", " + userId + ", 'ToAssist');" + "\n" + 
 				"COMMIT;";
+		return query;
+	}
+
+	public String reserveSpotEvent(int eventId, int userId)
+	{
+		String query = "UPDATE `Spartan`.`Events`" + "SET Spots = Spots - 1" + " WHERE idEvent = " + eventId + ";"; 
+		return query;		
+	}
+	
+	public String createSpot(int eventId, int userId)
+	{
+		String query = "INSERT INTO `Spartan`.`Spots` (`idEvent`, `idParticipant`, `Confirmation`) VALUES (" + eventId + ", " + userId + ", 'ToAssist');";
+		return query;
+	}
+	
+	public String cancelSpotInEvent(int eventId)
+	{
+		String query = "UPDATE `Spartan`.`Events`" + "SET Spots = Spots + 1" + " WHERE idEvent = " + eventId + ";"; 
+		return query;	
+	}
+	
+	public String cancelSpot(int eventId, int idUser)
+	{
+		String query = "DELETE FROM `Spartan`.`Spots`" + "WHERE idEvent = " + eventId + " AND idParticipant = " + idUser + ";";
+		return query;
+	}
+	
+	public String getEventKey(int eventId)
+	{
+		String query = "SELECT * FROM Spartan.Events WHERE idEvent = " + eventId + ";";
 		return query;
 	}
 	
@@ -409,12 +440,27 @@ public class ScriptGenerator
 	public String updateEventDate(int eventId, String nDate)
 	{
 		String query = 
-				"START TRANSACTION;" + "\n" + 
-				"USE `Spartan`;" + "\n" + 
 				"UPDATE `Spartan`.`Events`" + "\n" +
 				"SET Date = " + nDate +  "\n" + 
-				"WHERE idEvent = " + eventId + ";" + "\n" +
-				"COMMIT;";
+				"WHERE idEvent = " + eventId + ";";
+		return query;
+	}
+	
+	public String updateEventState(int eventId, String nState)
+	{
+		String query = 
+				"UPDATE `Spartan`.`Events`" + "\n" +
+				"SET State = '" + nState +  "'\n" + 
+				"WHERE idEvent = " + eventId + ";";
+		return query;
+	}
+	
+	public String cancelSpotsInEvent(int eventId)
+	{
+		String query = 
+				"UPDATE `Spartan`.`Spots`" + "\n" +
+				"SET Confirmation = '" + "Canceled" +  "'\n" + 
+				"WHERE idEvent = " + eventId + ";";
 		return query;
 	}
 	
@@ -486,12 +532,9 @@ public class ScriptGenerator
 	public String updateSpotConfirmation(int eventId, int idUser, String confirmation)
 	{
 		String query = 
-				"START TRANSACTION;" + "\n" + 
-				"USE `Spartan`;" + "\n" + 
 				"UPDATE `Spartan`.`Spots`" + "\n" +
 				"SET Confirmation = '" + confirmation + "'" + "\n" + 
-				"WHERE idEvent = " + eventId + " AND idParticipant = " + idUser + ";" + "\n" + 
-				"COMMIT;";
+				"WHERE idEvent = " + eventId + " AND idParticipant = " + idUser + ";";
 		return query;
 	}
 	
@@ -504,6 +547,20 @@ public class ScriptGenerator
 	{
 		String query = 
 				"SELECT * FROM `Spartan`.`PublicEvents`;";
+		return query;
+	}
+	
+	public String getPublicEventParam(String sport)
+	{
+		String query = 
+				"SELECT * FROM `Spartan`.`PublicEvents` WHERE Sport = '" + sport + "';";
+		return query;
+	}
+	
+	public String getPublicEventAssistences(int idUser)
+	{
+		String query = 
+				"SELECT * FROM `Spartan`.`EventAssistence` WHERE idUserEvent = " + idUser + ";";
 		return query;
 	}
 	
@@ -520,10 +577,7 @@ public class ScriptGenerator
 	public String registerPublicEventAssistence(int publicEventId, int userId)
 	{
 		String query = 
-				"START TRANSACTION;" + "\n" + 
-				"USE `Spartan`;" + "\n" + 
-				"INSERT INTO `Spartan`.`EventAssistence` (`idPublicEvent`, `idUserEvent`, `State`) VALUES (" + publicEventId + " , " + userId + ", 'ToAssist');" + "\n" + 
-				"COMMIT;";
+				"INSERT INTO `Spartan`.`EventAssistence` (`idPublicEvent`, `idUserEvent`, `State`) VALUES (" + publicEventId + " , " + userId + ", 'ToAssist');";
 		return query;
 	}
 	
@@ -541,11 +595,7 @@ public class ScriptGenerator
 	public String cancelPublicEvent(int eventId, int userId)
 	{
 		String query = 
-				"START TRANSACTION;" + "\n" + 
-				"USE `Spartan`;" + "\n" + 
-				"DELETE FROM `Spartan`.`EventAssistence`" + "\n" + 
-				"WHERE idPublicEvent = " + eventId + " AND idUserEvent = " + userId + " ;" + "\n" +  
-				"COMMIT;";		
+				"DELETE FROM `Spartan`.`EventAssistence`" + " WHERE idPublicEvent = " + eventId + " AND idUserEvent = " + userId + " ;";		
 		return query;
 	}
 	

@@ -93,5 +93,12 @@ public class RegularEvent extends Event
 		this.availableSpots = availableSpots;
 	}
 
+	/**
+	 * Retorna una representacion en String del objeto 
+	 */
+	public String getString()
+	{
+		return "@" + this.getIdEvent() + "%" + this.getSport() + "%" + this.getDescription() + "%" + this.getDate() + "%" + this.getSpots() + "%" + this.getState() + "%" + this.getPlace() + "%" + this.getDetails() + "@";
+	}
 	
 }

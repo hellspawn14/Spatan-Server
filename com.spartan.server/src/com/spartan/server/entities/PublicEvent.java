@@ -201,6 +201,11 @@ public class PublicEvent
 		this.date = date;
 	}
 	
+	public String getString()
+	{
+		return "@" + this.getEventId() + "%" + this.getEventName() + "%" + this.getSport() + "%" + this.getOrganizer() + "%" + this.getPlace() + "%" + this.getDetails() + "%" + this.getDate() + "@";
+	}
+	
 
 	
 }

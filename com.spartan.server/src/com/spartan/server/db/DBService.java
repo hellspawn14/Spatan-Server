@@ -83,6 +83,12 @@ public class DBService
 	
 	public void sendExcuteUpdate(String query) throws SQLException
 	{
+		try {
+			connectToDB();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		statement.executeUpdate(query);
 	}
 

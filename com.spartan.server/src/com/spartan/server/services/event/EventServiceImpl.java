@@ -165,6 +165,7 @@ public class EventServiceImpl implements EventService
 		{
 			String query = generator.getAllEventsSearch(sport);
 			ResultSet rs = dbService.sendQueryToDB(query);
+			System.out.println(query);
 			//Evento vacio con propositos generales 
 			RegularEvent Re = new RegularEvent (0, "date", "state", "place","details", 0, "key", "sport", "description");
 			//return this.getIdEvent() + ":" + this.getSport() + ":" + this.getDescription() + ":" + this.getDate() + ":" + this.getSpots() + ":" + this.getState() + ":" + this.getPlace() + ":" + this.getDetails();
@@ -284,6 +285,37 @@ public class EventServiceImpl implements EventService
 		return ans;
 	}
 	
+	
+	public String getAllEventsFromUser(int userId)
+	{
+		String ans = "";
+		try 
+		{
+			String query = "SELECT * FROM Spartan.Events WHERE idEventAuthor = " + userId + " AND State = 'Open';";
+			ResultSet rs = dbService.sendQueryToDB(query);
+			//Evento vacio con propositos generales 
+			RegularEvent Re = new RegularEvent (0, "date", "state", "place","details", 0, "key", "sport", "description");
+			//return this.getIdEvent() + ":" + this.getSport() + ":" + this.getDescription() + ":" + this.getDate() + ":" + this.getSpots() + ":" + this.getState() + ":" + this.getPlace() + ":" + this.getDetails();
+			while (rs.next()) 
+			{
+				Re.setIdEvent(rs.getInt("idEvent"));
+				Re.setSport(rs.getString("Sport"));
+				Re.setDescription(rs.getString("Description"));
+				Re.setDate(rs.getString("Date"));
+				Re.setSpots(rs.getInt("Spots"));
+				Re.setState(rs.getString("State"));
+				Re.setPlace(rs.getString("Place"));
+				Re.setDetails(rs.getString("Details"));
+				ans += Re.getString().trim();
+			}
+		}
+		catch(Exception e)
+		{
+			ans = "There's some thing wrong";
+			e.printStackTrace();
+		}
+		return ans;
+	}
 	
 	public static void main(String args[])
 	{

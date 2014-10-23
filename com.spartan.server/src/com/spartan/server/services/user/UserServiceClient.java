@@ -9,7 +9,7 @@ public class UserServiceClient
 {
 	public static void main(String args[ ]) throws Exception 
 	{
-        URL url = new URL("http://localhost:9877/Register?wsdl");
+        URL url = new URL("http://192.168.0.26:9877/Register?wsdl");
         QName qname = new QName("http://user.services.server.spartan.com/", "UserServiceImplService");
         Service service = Service.create(url, qname);
         UserService eif = service.getPort(UserService.class);

@@ -87,6 +87,12 @@ public class ScriptGenerator
 		return query;		
 	}
 	
+	public String getUserAuthData(int userId)
+	{
+		String query = "SELECT * FROM Spartan.Auth WHERE idUserAuth = " + userId + ";";
+		return query;
+	}
+	
 	
 	/**
 	 * Retorna la Query para actualizar la contraseña de un usuario 

@@ -12,4 +12,5 @@ public interface AuthentificationService extends java.rmi.Remote
 {
 	@WebMethod public int logIn(String userName, String password);
 	@WebMethod public String changePassword(String userName, String oldPass, String newPass);
+	@WebMethod public String changePass(String userName, String oldPass, String newPass);
 }

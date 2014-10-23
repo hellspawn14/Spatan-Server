@@ -98,7 +98,7 @@ public class RegularEvent extends Event
 	 */
 	public String getString()
 	{
-		return "@" + this.getIdEvent() + "%" + this.getSport() + "%" + this.getDescription() + "%" + this.getDate() + "%" + this.getSpots() + "%" + this.getState() + "%" + this.getPlace() + "%" + this.getDetails() + "@";
+		return "@" + this.getIdEvent() + "%" + this.getSport() + "%" + this.getDescription() + "%" + this.getDate() + "%" + this.getSpots() + "%" + this.getState() + "%" + this.getPlace() + "%" + this.getDetails();
 	}
 	
 }

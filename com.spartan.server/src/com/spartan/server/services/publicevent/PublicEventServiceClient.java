@@ -10,7 +10,7 @@ public class PublicEventServiceClient
 {
 	public static void main(String args[ ]) throws Exception 
 	{
-        URL url = new URL("http://localhost:9879/PublicEvent?wsdl");
+        URL url = new URL("http://192.168.0.26:9879/PublicEvent?wsdl");
         QName qname = new QName("http://publicevent.services.server.spartan.com/", "PublicEventServiceImplService");
         Service service = Service.create(url, qname);
         PublicEventService eif = service.getPort(PublicEventService.class);

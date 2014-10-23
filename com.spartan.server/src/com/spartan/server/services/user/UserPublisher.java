@@ -6,6 +6,6 @@ public class UserPublisher
 {
 	public static void main(String args[])
 	{
-		Endpoint.publish("http://localhost:9877/Register", new UserServiceImpl());
+		Endpoint.publish("http://192.168.0.26:9877/Register", new UserServiceImpl());
 	}
 }

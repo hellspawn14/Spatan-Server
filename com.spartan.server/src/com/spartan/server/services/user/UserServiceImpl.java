@@ -13,7 +13,7 @@ import com.spartan.server.db.ScriptGenerator;
  */
 //"com.spartan.server.services.authentification.AuthentificationService"
 @WebService(endpointInterface = "com.spartan.server.services.user.UserService")
-public class UserServiceImpl 
+public class UserServiceImpl implements UserService
 {
 	//------------------------------------------------------------------
 	//Atributos
@@ -117,9 +117,29 @@ public class UserServiceImpl
 		return ans;
 	}
 	
+	public String getScore(int idUser)
+	{
+		String query = "SELECT Score FROM Spartan.ScoreBoard WHERE idUserBoard = " + idUser + ";";
+		String ans = "";
+		try 
+		{
+			ResultSet rs = dbService.sendQueryToDB(query);
+			while (rs.next()) 
+			{
+				ans = rs.getDouble("Score") + "";
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		return ans;
+	}
+	
+	
 	public static void main(String args[])
 	{
 		UserServiceImpl S = new UserServiceImpl();
-		S.register("kiraxy","123456","102");
+		System.out.println(S.getScore(1));
 	}
 }

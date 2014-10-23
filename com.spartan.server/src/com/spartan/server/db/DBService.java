@@ -21,7 +21,7 @@ public class DBService
 	/**
 	 * Direccion del servidor de base de datos 
 	 */
-	private final static String DB_SERVER = "jdbc:mysql://127.0.0.1:3306/?user=root";
+	private final static String DB_SERVER = "jdbc:mysql://127.0.0.1:3306/?user=root&password=1234";
 		
 	//------------------------------------------------------------------
 	//Atributos

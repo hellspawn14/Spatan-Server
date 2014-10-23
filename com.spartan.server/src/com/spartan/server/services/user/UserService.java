@@ -10,4 +10,5 @@ import javax.jws.soap.SOAPBinding.Style;
 public interface UserService extends java.rmi.Remote 
 {
 	@WebMethod public String register(String userName, String pass, String phoneNumber);
+	@WebMethod public String getScore(int idUser);
 }

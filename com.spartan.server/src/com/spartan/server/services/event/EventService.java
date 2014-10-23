@@ -18,5 +18,5 @@ public interface EventService extends java.rmi.Remote
 	@WebMethod public String confirmAssistence(int userId, int eventId);
 	@WebMethod public String startEvent(int idEvent);
 	@WebMethod public String endEvent(int idEvent);
-	
+	@WebMethod public String getAllEventsFromUser(int userId);
 }

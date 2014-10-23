@@ -7,6 +7,6 @@ public class EventPublisher
 {
 	public static void main(String args[])
 	{
-		Endpoint.publish("http://localhost:9878/Event", new EventServiceImpl());
+		Endpoint.publish("http://192.168.0.26:9878/Event", new EventServiceImpl());
 	}
 }

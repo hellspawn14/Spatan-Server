@@ -122,4 +122,43 @@ public class AuthentificationServiceImpl implements AuthentificationService
 		}
 		return "Error";
 	}
+	
+	public String changePass(String idUser, String oldPass, String newPass)
+	{
+		int k = Integer.parseInt(idUser);
+		String ans = "";
+		System.out.println(k + "Llego");
+		String query = generator.getUserAuthData(k);
+		String passDB = null;
+		int userId = k;
+		try 
+		{
+			ResultSet rs = dbService.sendQueryToDB(query);
+			while (rs.next()) 
+			{
+				passDB = rs.getString("Password");
+			}
+			
+			System.out.println(passDB);
+			if (passDB.equals(oldPass))
+			{
+				//Cambia la contraseña 
+				query = generator.updateUserPassword(userId, newPass);
+				//System.out.println(query);
+				dbService.sendExcuteUpdate(query);
+				ans = "Your password has been changed";
+			}
+			
+			else
+			{
+				//Datos invalidos 
+				ans = "Invalid user or pass";
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return ans;
+	}
 }
